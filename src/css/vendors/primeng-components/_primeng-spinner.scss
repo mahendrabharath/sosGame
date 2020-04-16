@@ -1,0 +1,15 @@
+p-spinner .ui-spinner{
+    width:100%;
+    .ui-inputtext{
+        @include inputbox();
+        width:100%;
+    }
+    .ui-spinner-button{
+        display: none;
+    }    
+}
+p-spinner.ng-invalid.ng-touched .ui-inputtext,
+p-spinner.ng-invalid.ng-untouched.ui-inputwrapper-focus .ui-inputtext,
+p-spinner.ui-inputwrapper-filled.ng-invalid.ng-touched .ui-inputtext{
+    border: $fdx-invalid-border;
+}

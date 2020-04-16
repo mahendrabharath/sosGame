@@ -1,0 +1,46 @@
+///@group ag-grid checkbox
+///@param {String} $checkbox-bg [transparent] - Checkbox background color 
+///@param {String} $checkbox-bg-img [none] - Checkbox background image
+///@param {String} $checkbox-position [relative] - Checkbox position
+///@param {Number} $checkbox-font-size [14px] - Checkbox font-size
+///@param {String} $checkbox-color [gray] - Checkbox text color
+///@output 'background-color', 'background-image', 'position', 'font-size' and 'color' with fallback
+@mixin checkbox(
+    $checkbox-bg:$checkbox-bg,
+    $checkbox-bg-img:$checkbox-bg-img,
+    $checkbox-position:$checkbox-position,
+    $checkbox-font-size:$checkbox-font-size,
+    $checkbox-color:$checkbox-color
+)
+{
+    background: $checkbox-bg;
+    background-image: $checkbox-bg-img;
+    position: $checkbox-position;
+    font-size: $checkbox-font-size;
+    color: $checkbox-color;
+    &:before{
+        font-family: FontAwesome;
+        position: absolute;
+    }
+}
+
+.ag-icon-checkbox-unchecked{ 
+    @include checkbox();
+    &:before{
+        content:'\f096';
+        line-height: 1; 
+    }
+} 
+
+.ag-icon-checkbox-checked{
+    @include checkbox();
+    &:before{
+        content:'\f14a'; 
+        color: $fdx-primary-color;
+        line-height: 1;
+        background: #fff;
+    }
+}  
+
+
+

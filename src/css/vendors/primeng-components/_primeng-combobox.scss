@@ -1,0 +1,69 @@
+.ui-dropdown {
+    width: $dropdown-width !important; // tooverride the inline width assigned by prime ng
+    background-color: $default-bg;
+    &:hover{
+        border-color:$fdx-primary-color !important;
+    }
+    .ui-dropdown-trigger .fa {
+        color: $dropdown-caret-color;
+        padding-right: $dropdown-carent-right-gutter;
+        font-size: $dropdown-carent-size;
+    }
+    label.ui-dropdown-label {
+        color: $fdx-primary-color;
+        padding: $dropdown-padding;
+        line-height: $dropdown-lineheight;
+        font-size: $dropdown-fontsize;
+        font-family: $fdx-font-roman;
+        border-radius: $dropdown-borderradius;
+    }
+    .ui-dropdown-panel {
+        width: calc(100% + 2px) !important;
+        left: -1px !important;
+        top: calc(100% + 1px) !important;
+        @if $dropdown-panel-boxshadow-switch==custom {
+            box-shadow: $dropdown-panel-boxshadow;
+        }
+        .ui-dropdown-items-wrapper {
+            border-style: $dropdown-panel-border-type;
+            border-width: $dropdown-panel-border-width;
+            border-color: $dropdown-panel-border-color;
+            border-top: none;
+        }
+        .ui-dropdown-items {
+            padding: $dropdown-panel-padding;
+        }
+        .ui-dropdown-item {
+            margin: $dropdown-panel-item-margin;
+            border-style: $dropdown-panel-item-border-type;
+            border-width: $dropdown-panel-item-border-width;
+            border-color: $dropdown-panel-item-border-color;
+            line-height: $dropdown-panel-item-lineheight;
+            color: $label-color;
+            font-size: $dropdown-panel-font-size;
+            padding: $dropdown-panel-item-padding;
+            font-family: $fdx-font-roman;
+            background-color: $dropdown-panel-background-color;
+            &.ui-state-highlight,
+            &:hover {
+                border-left: 5px solid $dropdown-panel-hover-border-color;
+                background: $list-hover-bg;
+                color: $highlight-color;
+            }
+        }
+    }
+}
+.ui-dropdown.ui-state-focus{
+    border: $default-focus-border !important;
+    color: $highlight-color;
+}
+.ng-valid.ng-pristine.ng-touched .ui-dropdown,
+.ng-valid.ng-dirty.ng-touched .ui-dropdown,
+.ng-untouched.ng-pristine.ng-valid .ui-dropdown,
+.ng-untouched.ng-pristine.ng-invalid .ui-dropdown{
+    border: $default-border;
+}
+.ng-invalid.ng-touched .ui-dropdown,
+.ng-invalid.ng-untouched .ui-dropdown{
+    border: $fdx-invalid-border;
+}

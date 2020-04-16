@@ -1,0 +1,146 @@
+.section-box {
+    box-shadow: $box-shadow;
+    background: white;
+    padding:20px; 
+}
+.dashboardCont {
+    .ui-dropdown {
+        width: 115px !important; //  to overwrite the inline width assigned by ng prime js;
+    }
+}
+///@group layout
+///@param {String} $column-width [auto]- The width of the column
+///@param {String} $column-padding [0]- The padding of the column
+///@param {String} $column-float [left] - The float of the column
+///@output 'width', 'padding' and 'float'
+
+@mixin columns(
+	$column-width:$column-width,
+	$column-padding:$column-padding,
+	$column-float:$column-float){
+		width: $column-width;
+		padding:$column-padding;
+		float:$column-float;
+}
+// Applying a clean box-model to all elements
+
+  // Grid configuration
+  $grid-gutter    :  20px !default;
+  $grid-columnumns    :    12 !default;
+  $grid-children   : 'div' !default;
+  $grid-breakpoint :  48em !default;
+  
+  // Creating placeholders
+  // For all columnumns of the grid
+  @for $i from 1 through $grid-columnumns {
+    %grid-column-#{$i} {
+      $multiplier: $i / $grid-columnumns;
+      width: calc(100% * #{$multiplier} - #{$grid-gutter} * (1 - #{$multiplier}));
+    }
+  }
+  
+  // Parent, grid wrapper
+  %grid-parent {
+    overflow: initial;
+  }
+    
+  // Children, grid columnumns
+  %grid-child {
+    float: left;
+    margin-right: $grid-gutter;
+  }
+  
+  // Last child from grid
+  %grid-last-child {
+    margin-right: 0;
+  }
+  
+  // Instanciate placeholder inside a media query
+  // So it can be extended from within the same media query elsewhere in the CSS
+  // This aims at reducing CSS output by merging all those rules
+  @media (max-width: $grid-breakpoint) {
+    %grid-fallback > #{$grid-children} {
+      width: 100% !important;
+      float: none;
+      margin-right: 0;
+    }
+  }
+  
+  
+  // Mixin to be called on parent
+  // Will use :nth-of-type selectors to define columnumns width
+  // e.g. grid(1, 2, 4, 5) will result in
+  // | 1 |  2   |     4      |       5       |
+  @mixin grid($columns...) { 
+    // Clearing inner floats
+    @extend %grid-parent;
+  
+    // Direct children (default 'div')
+    > #{$grid-children} { 
+      @extend %grid-child;
+      
+      // Setting columnumns
+      @for $i from 1 through length($columns) {
+        &:nth-of-type(#{$i}n) {
+          @extend %grid-column-#{nth($columns, $i)};
+        }
+      }
+        
+      // Cancelling right margin on last element from each row
+      &:nth-of-type(#{length($columns)}n) {
+        @extend %grid-last-child;
+      }
+    }
+  
+    // Small screens
+    @media (max-width: $grid-breakpoint) {
+      @extend %grid-fallback;
+    }
+  }
+.form-row {
+    @include grid(4,4,4);
+}
+.form-three-columns {
+    @include grid(3,6,3);
+}
+.row-two-colunm {
+    @include grid(6,5);
+}
+.text-right{
+	text-align:right;
+}
+.text-center{
+	text-align:center;
+}
+.text-left{
+	text-align:left;
+}
+.m-t-10{
+	margin-top: 10px;
+}
+
+
+
+.left-columns{
+	@include columns($column-width:50%,$column-padding:0 10px 0 0);
+}	
+.right-columns{
+	@include columns($column-width:50%,$column-padding:0 0 0 10px,$column-float:right);
+}
+.column-left{
+	@include columns($column-padding:0 10px 0 0);
+}	
+.column-right{
+	@include columns($column-width:13%,$column-padding:0 10px 0 0px);
+}	
+
+.exploreIconCls{
+	color: $fdx-primary-color; 
+	cursor:pointer; 
+	margin-left:8px;
+}
+.iconCls{
+  color: #848484;
+  float: right;
+  line-height: 30px;
+}

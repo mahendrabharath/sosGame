@@ -1,0 +1,114 @@
+// @mixins
+//
+// We use this mixin to create a default label base.
+
+///@group Components
+///@param {String} $label-color [#848484] - The color of the label base
+///@param {String} $label-font-family [PMNCaeciliaW01-75Bold]- The font-family of the label base
+///@param {Number} $label-font-size [14px] - The font-size of the label base
+///@param {Number} $label-margin [8px 0px] - The margin of the label base
+///@param {Number} $label-padding [0px] - The padding of the label base
+///@output 'color', 'font-family', 'font-size', 'margin' and 'padding' with fallback
+@mixin label-base(
+    $label-color:$label-color,
+    $label-font-family:$label-font-family,
+    $label-font-size:$label-font-size,
+    $label-margin:$label-margin,
+    $label-padding:$label-padding,
+    $label-display:$label-display
+    ) {
+    color: $label-color;
+    font-family: $label-font-family;
+    font-size: $label-font-size;
+    margin:$label-margin;
+    padding:$label-padding;
+    display:$label-display;
+}
+
+///@group Components
+///@param {Number} $from-group-margin-bottom [15px] - The margin of the form group element
+///@output 'margin' with fallback
+
+@mixin form-group($from-group-margin-bottom:$from-group-margin-bottom){
+	margin-bottom: $from-group-margin-bottom;
+}
+
+///@group Components
+///@param {String} $from-asterisk-color [#cf4c35] - The color of the asterisk symbol
+///@param {Number} $form-astrisk-font-size [15px] - The font-size of the asterisk symbol 
+///@param {Number} $form-astrisk-line-height  [10px] - THe line-height of the asterisk symbol
+///@output 'content', 'color', 'font-size' and 'line-height' with fallback
+
+@mixin asterisk-symbol(
+    $from-asterisk-color:$from-asterisk-color,
+    $form-astrisk-font-size:$form-astrisk-font-size,
+    $form-astrisk-line-height:$form-astrisk-line-height
+    ){
+    color: $from-asterisk-color;
+    font-size: $form-astrisk-font-size;
+    line-height: $form-astrisk-line-height;
+}
+
+.form-group{
+    @include form-group();
+    .form-label{
+        @include label-base($label-margin:0 0 5px);        
+        span{
+            @include asterisk-symbol();
+        }
+    }
+    .account-label{
+        @include label-base($label-margin:0);
+        line-height:35px; 
+        span{
+            @include asterisk-symbol();
+        }
+    }
+    .form-sub-heading{
+        @include label-base($label-font-size:16px,$label-margin:0,$label-color:#333333);
+    }
+    .form-control{
+        line-height: 19px;
+    }
+}
+.radiobutton-label{
+    @include label-base($label-font-size:$form-font-size,$label-color:$input-color,$label-font-family:$fdx-font-roman);
+}
+.checkbox-label{
+    @include label-base($label-font-size:12px,$label-font-family:$fdx-font-light,$label-margin:17px 0);
+}
+.sub-heading {
+    @include label-base($label-font-size:15px,$label-margin:30px 0px 10px);
+}
+.locakHeaderLabels{
+    @include label-base($label-color:$highlight-color,$label-font-size:18px);
+}
+.localLabel{
+    @include label-base($label-margin:10px 0 0);
+}
+.form-label-last-field{
+        @include label-base($label-margin:0 0 5px);      
+}
+.clickableLabel{
+    color:#F45B29;
+    cursor:pointer;
+}
+.clickableLabel:hover{
+    text-decoration: underline;
+}
+.accountRull-label{
+    @include label-base($label-font-size:18px,$label-margin:10px 0,$label-color:#333333);
+}
+.selectedCountRowLabelChecked{
+    background: $fdx-primary-color;
+    height: 20px;
+    top: 4px;
+    color: white;
+    margin: 0px 5px 0px 5px;
+    padding: 4px 4px;
+    border-radius: 8px;
+}
+
+.labelindvidualcomposite{
+    @include label-base();
+}

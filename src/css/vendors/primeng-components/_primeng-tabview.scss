@@ -1,0 +1,43 @@
+.ui-tabview.ui-tabview-top {
+    padding: 20px 0 0;
+    .ui-tabview-nav{
+       padding:0;
+        li{
+            border-radius: 0px;
+            box-shadow: none;
+            border: 1px solid transparent;
+            &:hover,
+            &:focus{                
+              background-color:$fdx-primary-color;    
+              border:1px solid $fdx-primary-color;      
+              color:#ffffff;
+              a{
+                     color:#ffffff;                    
+              }
+            }
+            a{
+            font-family: $tab-font-family;
+            font-size: $tab-font-size;
+            color: #222222;
+            text-transform: $tab-text-transform;            
+            }
+                      
+        }
+    }
+    li.ui-state-active{
+      background-color: $fdx-primary-color;    
+      border:1px solid $fdx-primary-color; 
+      a{      
+      color:#ffffff;
+     } 
+    }
+    .ui-tabview-panels{
+    	box-shadow: $box-shadow;
+	    background: $default-bg;
+	    padding: 20px; 
+       .ui-tabview-panel{
+              padding:0;
+       }
+    }
+   
+}

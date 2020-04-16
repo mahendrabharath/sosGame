@@ -1,0 +1,37 @@
+///@group Primeng-components
+///@param {String} $radio-bg [#EEEEEE] - The background-color of the radiobutton
+///@param {Number} $radio-bor-radius [100%] - The border-radiu of the radiobutton
+///@param {Number} $radio-width [20px] - The width of the radiobutton
+///@param {Number} $radio-height [20px] - The height of the radiobutton
+///@param {String} $radio-border [1px solid #d3d3d3] - The border of the radiobutton
+///@output 'background-color', 'border-radius', 'width', 'height' and 'border'
+@mixin radiobutton(
+    $radio-bg: $radio-bg,
+    $radio-bor-radius: $radio-bor-radius,
+    $radio-width: $radio-width,
+    $radio-height: $radio-height,
+    $radio-border: $default-border
+    ){    
+    background-color: $radio-bg;
+    border-radius: $radio-bor-radius;    
+    width: $radio-width;
+    height: $radio-height;
+    border: $default-focus-border;
+    &:hover{
+        border: 1px solid $highlight-color;
+    }
+}
+.ui-radiobutton-box{
+    @include radiobutton();    
+    .ui-radiobutton-icon{
+        margin: 0;
+        font-size: $radio-font-size;
+    }
+}
+.ui-radiobutton-box.ui-state-active{
+    color: $fdx-primary-color;
+}
+.ui-radiobutton-box.ui-state-focus{    
+    border: 1px solid $highlight-color;
+}
+

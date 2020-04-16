@@ -1,0 +1,124 @@
+//ag-grid custom styles
+
+
+//ag-grid common styles variables
+
+///grid color
+$ag-grid-color: #5A5A5D;
+$ag-grid-base-font-size: 14px;
+$ag-grid-cell-font: bold 14px/1.4em "$fdx-font-heavy";
+///grid wrap border - 1px solid #ccc;
+$ag-grid-wrap-border: none;  
+$ag-grid-link-cursor: pointer;
+
+//ag-grid header styles variables
+
+///grid header background color
+$ag-grid-header-bg: #F6F7F7;
+$ag-grid-header-font: bold 14px/1.4em $fdx-font-heavy;
+///grid header text transform - uppercase/lowercase/capiltalize/none
+$ag-grid-header-text-transform: uppercase; 
+$ag-grid-header-line-height: 1.4em;
+///grid header border type - solid,dashed or any other css border style
+$ag-grid-header-border-type: solid; 
+///grid header color - transparent or say,#ccc or in rgb
+$ag-grid-header-border-color: #c2c2c2;
+///grid header width - can be changed in to 1px 2px 1px 2px
+$ag-grid-header-border-width: 1px; 
+///grid header divider is a border - it can be  1px solid #ccc;
+$ag-grid-header-divider: none; 
+
+///grid body border type - solid,dashed or any other css border style
+$ag-grid-body-border-type: solid; 
+///grid body color - transparent or say,#ccc or in rgb
+$ag-grid-body-border-color: #f0f0f0;
+///grid header width - can be changed in to 1px 2px 1px 2px
+$ag-grid-body-border-width: 1px; 
+
+//ag-grid row styles variables
+
+$ag-grid-row-even-bg:#EFEFF0;
+$ag-grid-row-odd-bg:#FBFBFB;
+$ag-grid-row-even-hover-bg: #EFEFF0;
+$ag-grid-row-even-hover-color: inherit;
+$ag-grid-row-odd-hover-bg: #FBFBFB;
+$ag-grid-row-odd-hover-color: inherit;
+///grid header border type - solid,dashed or any other css border style
+$ag-grid-row-divider-type: solid; 
+///grid row divider width - enter only one value in px or any other css unit.
+$ag-grid-row-divider-width : 0; 
+///grid row divider color - transparent or say,#ccc or in rgb
+$ag-grid-row-divider-color: transparent;
+
+//ag-grid cell styles variables
+
+///grid cell text transform - uppercase/lowercase/capiltalize/none
+$ag-grid-cell-text-transform: none; 
+///grid link text transform - uppercase/lowercase/capiltalize/none
+$ag-grid-link-text-transform: uppercase;
+///grid cell padding - can be changed in to 1px 2px 1px 2px
+$ag-grid-cell-padding: 0 5px 0 10px; 
+$ag-grid-cell-line-height: 58px;
+///grid cell focus border - 1px solid #ccc;
+$ag-grid-cell-focus-border: none; 
+///grid cell divider type - solid,dashed or any other css border style
+$ag-grid-cell-divider-type: solid; 
+///grid cell divider width - enter only one value in px or any other css unit.
+$ag-grid-cell-divider-width: 0; 
+///grid cell divider color - transparent or say,#ccc or in rgb
+$ag-grid-cell-divider-color: transparent; 
+
+// ///grid cell focus border - 1px solid #ccc;
+// $ag-grid-cell-focus-border: none; 
+///grid cell type - solid,dashed or any other css border style
+$ag-grid-cell-type: solid; 
+///grid cell width - enter only one value in px or any other css unit.
+$ag-grid-cell-width: 1px; 
+///grid cell color - transparent or say,#ccc or in rgb
+$ag-grid-cell-color: transparent; 
+///grid cell hover color - #c2c2c2 or say,#ccc or in rgb
+$ag-grid-cell-hover-color: #c2c2c2;
+///grid cell active color - #9b9b9b or say,transparent or in rgb
+$ag-header-cell-active-color: #9b9b9b;
+///grid cell padding left- enter only one value in px or any other css unit.
+$ag-grid-cell-padding-left: 10px;
+///grid header cell menu button width - enter only one value in px or any other css unit.
+$ag-header-cell-height:25px;
+$ag-header-cell-menu-button-width: 1px;
+///grid header cell menu button type - solid,dashed or any other css border style
+$ag-header-cell-menu-button-style: solid;
+///grid header cell menu button color - transparent or say,#ccc or in rgb
+$ag-header-cell-menu-button-color: transparent;
+///grid header cell menu button padding - enter only one value in px or any other css unit.
+$ag-header-cell-menu-button-padding: 6px 1px 0px 3px;
+///grid header cell menu button margin - enter only one value in px or any other css unit.
+$ag-header-cell-menu-button-margin: -6px 0 0 0;
+///grid header cell menu button line height - enter only one value in px or any other css unit.
+$ag-header-cell-menu-button-line-height: 20px;
+///grid header cell menu button cursor - pointer,default or any other css cursor style.
+$ag-header-cell-menu-button-cursor: pointer;
+
+$ag-header-cell-resize-position-top:0px;
+
+$ag-header-icon-position: absolute;
+$ag-header-icon-right: 5px;
+$ag-header-icon-margin: 0;
+
+$ag-header-cell-text-padding: 0 15px 0 0px;
+//ag-grid menu styles variables
+
+$ag-grid-menu-column-select-width-background: #e9e9e9;
+$ag-grid-menu-column-select-width: 250px; 
+$ag-grid-selction-checkbox-padding: 0 15px 0 15px;
+$ag-column-select-menu-lineheight: 23px;
+
+
+//ag-checkbox custom styles variables
+
+///check custom style background color
+$checkbox-bg:transparent;
+$checkbox-bg-img:none;
+$checkbox-position:relative;
+$checkbox-font-size:14px;
+$checkbox-color:gray ;
+

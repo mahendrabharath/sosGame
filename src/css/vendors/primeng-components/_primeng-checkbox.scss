@@ -1,0 +1,54 @@
+///@group Primeng-components
+///@param {String} $check-bg [#fff] - The background-color of the checkbox
+///@param {Number} $check-bor-radius [0px] - The border-radius of the checkbox
+///@param {Number} $check-width [15px] - The width of the checkbox
+///@param {Number} $check-height [5px] - The height of the checkbox
+///@param {Number} $check-border-width [1px] - The border-width of the checkbox
+///@param {String} $check-border-style [solid] - The border-style of the checkbox
+///@param {String} $check-border-color [#979797] - The border-color of the checkbox
+///@output 'background-color', 'border-radius', 'width', 'height' and 'border'
+@mixin checkbox(
+    $check-bg: $check-bg,
+    $check-bor-radius: $check-bor-radius,
+    $check-width: $check-width,
+    $check-height: $check-height,
+    $check-border: $default-border
+    ){    
+    background-color: $check-bg;
+    border-radius: $check-bor-radius;    
+    width: $check-width;
+    height: $check-height;
+    border: $check-border-width $check-border-style $check-border-color;
+    &:hover{
+        border: $check-border-width $check-border-style $highlight-color;
+    }
+}
+.ui-chkbox .ui-chkbox-box{
+    @include checkbox();    
+    .ui-chkbox-icon{
+        margin: 0;
+        font-size: $check-font-size;
+   		color: $fdx-primary-color;
+    }
+    &.ui-state-focus{    
+    border: $check-border-width $check-border-style $highlight-color;
+	}
+}
+///@group Primeng-components
+///@param {String} $check-box-label-color [#878787] - The font color of the label for checkbox
+///@param {Number} $check-box-label-font-size [13px] - The font size of the label for checkbox
+///@param {String} $check-box-label-font-family [PMNCaeciliaW01-55Roman] - The font family of the label for checkbox
+///@output 'color', 'font-size', and 'font-family'
+@mixin checkbox-label(
+	$check-box-label-color:$check-box-label-color,
+	$check-box-label-font-size:$check-box-label-font-size,
+	$check-box-label-font-family: $check-box-label-font-family
+){
+	color: $check-box-label-color;
+	font-size: $check-box-label-font-size;
+	font-family: $check-box-label-font-family;
+}
+.ui-chkbox-label{
+	@include checkbox-label();
+}
+

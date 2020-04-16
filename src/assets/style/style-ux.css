@@ -1,0 +1,379 @@
+body {
+    background: #F0F0F0
+}
+
+/*====================== For top Nav bar ========================*/
+
+.top-nav {
+    background: rgb(255, 254, 254);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 70px;
+}
+
+/* .top-nav-logo {
+    padding: 15px
+} */
+
+.top-nav-div {
+    display: inline;
+    float: right;
+    border-left: 0.1px solid #98A3AF;
+    width: 80px;
+    height: 70px;
+}
+
+.top-nav-profile {
+    display: inline;
+    padding: 10px 25px;
+}
+
+span.top-nav-profile-caption {
+    text-transform: uppercase;
+    font-family: sans-serif;
+    color: #98A3AF;
+}
+
+.top-nav-div[data-active] {
+    background: #163563;
+}
+
+/*====================== End top Nav bar ========================*/
+
+/*====================== For side Nav bar ========================*/
+
+.sidenav {
+    height: 100%;
+    width: 75px;
+    position: fixed;
+    z-index: 1;
+    top: 70px;
+    left: 0;
+    background-color: #163563;
+    overflow-x: hidden;
+    /* padding-top: 20px; */
+}
+
+.sidenav .side-nav-div {
+    padding: 20px 0;
+    color: #C4CED9;
+    background-color: #163563;
+}
+.side-nav-div[data-active] {
+    background: #d5d8dd;
+    color: #333;
+    cursor: pointer;
+}
+
+.side-nav-div :hover {
+    background-color: #C4CED9;
+    color: #163563;
+    cursor: pointer;
+}
+
+/*====================== End side Nav bar ========================*/
+
+/* .layout {
+    top: 11%;
+    left: 9%;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+} */
+.layout {
+    /* top: 11%; */
+    /* left: 9%; */
+    /* position: absolute; */
+    height: 100%;
+    width: calc(100% - 75px);
+    /* display: none; */
+    margin-left: 75px;
+    float: left;
+    /* overflow: scroll; */
+    top: 11%;
+    /* left: 9%; */
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+}
+
+.widget {
+    border: 0.5px ridge rgba(51, 51, 51, 0);
+    background-color: #FFFF;
+    border-radius: 2px;
+    box-shadow: 3px 3px 3px grey;
+}
+
+.widget-icon {
+    padding: 2%;
+}
+
+.widget h3 {
+    font-family: sans-serif;
+    color: #6d6b6b;
+    display: inline;
+    /* top: 0px;
+    left: 6%; 
+    position: fixed;*/
+}
+
+.close-icon {
+    display: inline;
+    float: right;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.widget-hide {
+    border: 0.5px ridge rgba(51, 51, 51, 0);
+    background-color: #FFFF;
+    border-radius: 2px;
+    box-shadow: 3px 3px 3px grey;
+    height: 6% !important;
+    display: inline-table;
+}
+
+.widget-hide h3 {
+    font-size: 12px;
+    font-family: sans-serif;
+    color: #6d6b6b;
+    /* top: 0%;
+    left: 6%;
+    position: fixed; */
+    display: inline;
+}
+
+.widget-hide>.widget-container {
+    display: none;
+}
+
+.widget-hide>.close-icon {
+    display: inline;
+    float: right;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.toolbox {
+    width: 100%;
+    height: 120px;
+    overflow: scroll;
+    bottom: 0px;
+    position: fixed;
+    left:0;
+    z-index: 9999;
+}
+
+/*=======================Tool bar ====================================================*/
+
+.show-tick {
+    background: url(https://www.freeiconspng.com/uploads/checkmark-png-photos-13.png) no-repeat;
+    background-size: 100%;
+}
+.show-tick img{
+    opacity: 0 !important;
+}
+.hide-tick {
+    background: #192436 no-repeat;
+    background-size: 100%;
+}
+.hide-tick img{
+    opacity: 0.9 !important;
+}
+.chips-container {
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.chips-icon {
+    color: #fff !important;
+    font-size: 2rem !important;
+}
+
+.dataSourceChip-avtice {
+    background-color: #1D7ABD !important;
+    color: #fff !important;
+    font-size: 1.25rem !important;
+}
+
+.dataSourceChip-inavtice {
+    background-color: #E0E0E0 !important;
+    color: #AEAEAE !important;
+}
+
+/* override material ui library */
+
+.MuiChip-root-16 {
+    height: 25px;
+}
+
+/* override material ui library */
+
+.MuiChip-avatar-19 {
+    padding: 5% !important;
+}
+
+/* override material ui library */
+
+.MuiChip-root-16 {
+    height: 25px !important;
+    font-size: 85% !important;
+}
+
+.table {
+    padding: 0% 5% 0% 5%;
+}
+
+.location-clearall {}
+
+/*=======================End Tool bar ====================================================*/
+
+/*=======================Saved search  ====================================================*/
+
+
+/* sandhya's changes*/
+.top-nav-left{
+    float:left;
+    padding: 5px 0px 5px 10px;
+}
+.top-nav-right{
+    float:right;
+    text-align: center;
+}
+.side-nav-profile{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}
+.side-nav-profile-caption{
+    text-align: center;
+    margin: 0;
+}
+html{
+    width: 100%;
+    float: left;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+body{
+float:left;
+width: 100%;
+margin: 0 auto;
+height: 100%;
+padding-top: 0px;
+}
+#root{
+    float:left;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    padding-top: 0px;
+}
+.content{
+    height: calc(100% - 70px - 120px);
+    margin-top: 85px;
+    position: relative;
+}
+.title{
+    font-size: 14px!important;
+    font-weight: bold;
+    color: #222;
+}
+.icon{
+    float: left;
+    margin-right: 7px;
+    position: relative;
+    top: 4px;
+    font-size: 18px;
+    color: #777;
+}
+.icon1{
+    float: left;
+    margin-right: 20px;
+    position: relative;
+    top: 4px;
+    font-size: 16px;
+}
+.range{
+    float: left;
+    margin: 0 10px 0px 0px;
+}
+.range-slider{
+    float: left;
+    
+}
+.range2{
+        margin-left: 10px;
+}  
+.chips-container{
+    width: auto;
+    padding: 7px;
+    background: #fff;
+    border-radius: 20px;
+    color: #fff;
+    border: 0.5px solid #ddd;
+    margin: 20px 20px 10px 0;
+}
+
+.location{
+    float: left;
+    margin-bottom: 20px !important;
+    
+}
+.MuiTabs-root-104{
+    float: left;
+    display: block;
+}
+.addlocation{
+    width: auto;
+    background: #fff;
+    border-radius: 20px;
+    color: #fff;
+    border: 0.5px solid #ddd;
+    margin: 10px 20px 10px 0;
+    padding: 3px;
+}
+
+.table{
+padding: 0 !important;
+}
+
+
+.results-btn{
+    background: #1b7cc0;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px;
+    width: 47%;
+}
+.toggle-custom{
+    margin-bottom: 10px;
+}
+.toggle-custom label{
+    position: absolute !important;
+    right: 0 !important;
+    flex-direction:row-reverse;
+}
+.MuiFormControlLabel-root-16{
+    margin-right: 0!important;
+}
+.MuiChip-clickable-70,.MuiChip-root-69{
+margin-right: 6px;
+}
+
+.defaultWidgetFrame .defaultWidgetFrameHeader{
+    padding: 3px 0 10px 20px!important;
+
+}
+.MuiChip-avatar-72{
+    padding: 4px 8px 5px 13px;
+}
+.MuiTypography-body1-54,.MuiChip-label-74,.MuiTab-label-123{
+    font-size: 11px!important;
+}

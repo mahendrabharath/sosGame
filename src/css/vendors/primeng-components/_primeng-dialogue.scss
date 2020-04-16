@@ -1,0 +1,258 @@
+///@group Primeng-components
+///@param {Number} $dialog-width [auto] - The width of the dialog box
+///@param {String} $dialog-shadow [none] - The border shadow of the dialog box
+///@param {String} $dialog-bg [#fcfcfc] - The background color of the dialog box
+///@param {Number} $dialog-border-radius [0] - The border radius of the dialog box
+///@output 'width', 'shadow', 'background-color' and 'border-radius'
+
+@mixin dialog(
+        $dialog-width: $dialog-width,
+        $dialog-shadow: $dialog-shadow,
+        $dialog-bg: $dialog-bg,
+        $dialog-border-radius: $dialog-border-radius
+    ){
+    
+        width: $dialog-width;
+        box-shadow: $dialog-shadow;
+        background: $dialog-bg; 
+        border-radius: $dialog-border-radius;
+}
+///@group Primeng-components
+///@param {Number} $dialog-header-padding [30px] - The padding of the header dialog box
+///@param {String} $dialog-header-align [center] - The alignment of the header dialog box
+///@param {String} $dialog-header-bg [#fcfcfc]- The background-color of the header dialog box
+///@output 'padding', 'align' and 'background-color'
+
+@mixin dialog-header(
+        $dialog-header-padding: $dialog-header-padding,
+        $dialog-header-align: $dialog-header-align,
+        $dialog-header-bg: $dialog-header-bg
+    ){
+        padding: $dialog-header-padding;
+        text-align: $dialog-header-align;
+        background: $dialog-header-bg;
+}
+///@group Primeng-components 
+///@param {String} $dialog-header-close-icon-color [#848484] - The color of the header close icon button
+///@param {String} $dialog-header-close-icon-position [absolute] - The position of the header close icon button
+///@param {String} $dialog-header-close-icon-position-right [0]- The position right of the header close icon button
+///@param {String} $dialog-header-close-icon-position-top [0]- The position top of the header close icon button
+///@param {String} $dialog-header-close-icon-hover-bg [transparent]- The hover background-color of the header close icon button
+///@param {String} $dialog-header-close-icon-hover-border-color [transparent]- The border-color of the header close icon button
+///@param {String} $dialog-header-close-icon-hover-color [#333]- The hover color of the header close icon button 
+///@output 'color', 'position', 'position-right', 'position-top', 'background-color', 'border-color' and 'hover-color'
+
+
+@mixin dialog-header-close-icon(
+        $dialog-header-close-icon-color: $dialog-header-close-icon-color,
+        $dialog-header-close-icon-position: $dialog-header-close-icon-position,
+        $dialog-header-close-icon-position-right: $dialog-header-close-icon-position-right,
+        $dialog-header-close-icon-position-top: $dialog-header-close-icon-position-top,
+        $dialog-header-close-icon-hover-bg: $dialog-header-close-icon-hover-bg,
+        $dialog-header-close-icon-hover-border-color: $dialog-header-close-icon-hover-border-color,
+        $dialog-header-close-icon-hover-color: $dialog-header-close-icon-hover-color
+    ){
+        color: $dialog-header-close-icon-color;
+        position: $dialog-header-close-icon-position;
+        right: $dialog-header-close-icon-position-right;
+        top: $dialog-header-close-icon-position-top;
+        &:hover{
+            border-color: $dialog-header-close-icon-hover-bg;
+            background: $dialog-header-close-icon-hover-border-color;
+            color: $dialog-header-close-icon-hover-color;
+        }
+}
+///@group Primeng-components
+///@param {String} $dialog-header-title-color [#4d4d4d] - The color of the header title of the dialog box
+///@param {Number} $dialog-header-title-size [24px] - The font-size of the header title of the dialog box 
+///@param {Number} $dialog-header-title-weight [300] - The font-weight of the header title of the dialog box
+///@param {String} $dialog-header-title-font-family [PMNCaeciliaW01-45Light] - The font-family of the header title of the dialog box
+///@output 'color', 'size', 'font family' and 'weight'
+
+@mixin dialog-header-title(
+        $dialog-header-title-color: $dialog-header-title-color,
+        $dialog-header-title-size: $dialog-header-title-size,
+        $dialog-header-title-weight: $dialog-header-title-weight,
+        $dialog-header-title-font-family: $dialog-header-title-font-family
+    ){        
+        font-size: $dialog-header-title-size;
+        font-weight: $dialog-header-title-weight;
+        color: $dialog-header-title-color;
+        font-family: $dialog-header-title-font-family;
+}
+
+///@group Primeng-components
+///@param {Number} $dialog-content-margin [0px 30px 30px] - The margin of the content of the dialog box
+///@param {Number} $dialog-content-padding [20px 20px 5px 20px] - The padding of the content of the dialog box
+///@param {Number} $dialog-content-height [auto] - The height of the content of the dialog box
+///@param {Number} $dialog-content-max-height [500px] - The max-height of the content of the dialog box
+///@param {String} $dialog-content-bg [rgba(242, 243, 245, 0.5)] - The background-color of the content of the dialog box
+///@param {String} $dialog-content-color [#848484] - The color of the content of the dialog box
+///@output 'margin', 'padding', 'height', 'max-height', 'background-color' and 'color'
+@mixin dialog-content(
+    $dialog-content-margin: $dialog-content-margin,
+    $dialog-content-padding: $dialog-content-padding,
+    $dialog-content-height: $dialog-content-height,
+    $dialog-content-max-height: $dialog-content-max-height,
+    $dialog-content-bg: $dialog-content-bg,
+    $dialog-content-color: $dialog-content-color
+    ){
+        margin: $dialog-content-margin;
+        padding: $dialog-content-padding;
+        height: $dialog-content-height;		
+        max-height: $dialog-content-max-height;	
+        background-color: $dialog-content-bg;
+        color: $dialog-content-color;
+}
+@mixin dialog-footer(
+    $dialog-footer-padding: $dialog-footer-padding,
+    $dialog-footer-align: $dialog-footer-align,
+    $dialog-footer-bg: $default-bg,
+    $dialog-footer-border: $dialog-footer-border
+){
+    padding: $dialog-footer-padding;
+    text-align: $dialog-footer-align;
+    background-color: $dialog-footer-bg;
+    border: $dialog-footer-border; 
+}
+.ui-widget-overlay {
+    background: $overlay-bg;
+}
+.lockWidth {
+    .ui-dialog {
+        @include dialog($dialog-width:67%);
+        .ui-dialog-titlebar{
+            @include dialog-header();
+            .ui-dialog-titlebar-icon{
+                @include dialog-header-close-icon();
+            }            
+            .ui-dialog-title{
+                @include dialog-header-title();
+            }
+        }
+        .ui-dialog-content {
+            @include dialog-content();
+        }
+        .ui-dialog-footer {
+            @include dialog-footer();
+        }
+    }
+}
+
+.createCompDialog {
+    .ui-dialog{
+        @include dialog($dialog-width:95%);
+        .ui-dialog-titlebar{
+            @include dialog-header();
+            .ui-dialog-titlebar-icon{
+                @include dialog-header-close-icon();
+            }            
+            .ui-dialog-title{
+                @include dialog-header-title();
+            }
+        }
+        .ui-dialog-content{
+            @include dialog-content();
+        }
+        .ui-dialog-footer {
+            @include dialog-footer();
+        }
+    }
+}
+
+.alertBox 
+{
+    .ui-dialog{
+           @include dialog($dialog-width:auto,$dialog-border-radius:4px);
+        padding:4px;
+    }
+    .ui-dialog-titlebar{
+        @include dialog-header($dialog-header-padding:0,$dialog-header-align:left);
+        .ui-dialog-titlebar-icon{
+            @include dialog-header-close-icon();
+        }            
+        .ui-dialog-title{
+            @include dialog-header-title($dialog-header-title-size:14px,$dialog-header-title-font-family:$fdx-font-bold);
+            padding-left: 10px; 
+        }
+    }
+    .ui-dialog-content{
+        @include dialog-content(
+            $dialog-content-padding: 12px 10px,
+            $dialog-content-bg: #fff,
+            $dialog-content-margin:5px 0 0,
+            $dialog-content-color:$highlight-color
+            );
+            font-weight: $fdx-font-weight;
+            font-family: $fdx-font-bold;
+    }
+    .ui-dialog-footer{
+        @include dialog-footer($dialog-footer-padding: 6px 0 6px 6px,$dialog-footer-bg:#ebebeb);
+           
+    }
+}
+.individualCompositeAlert 
+{
+    .ui-dialog{
+           @include dialog($dialog-border-radius:4px);
+        padding:4px;
+        max-width:60%;
+    }
+    .ui-dialog-titlebar{
+        @include dialog-header($dialog-header-padding:0,$dialog-header-align:left);
+        .ui-dialog-titlebar-icon{
+            @include dialog-header-close-icon();
+        }            
+        .ui-dialog-title{
+            @include dialog-header-title($dialog-header-title-size:14px,$dialog-header-title-font-family:$fdx-font-bold);
+            padding-left: 10px; 
+        }
+    }
+    .ui-dialog-content{
+        @include dialog-content(
+            $dialog-content-padding: 12px 10px,
+            $dialog-content-bg: #fff,
+            $dialog-content-margin:5px 0 0,
+            $dialog-content-color:$highlight-color
+            );
+            font-weight: $fdx-font-weight;
+            font-family: $fdx-font-bold;
+            font-size: 14px;
+    }
+    .ui-dialog-footer{
+        @include dialog-footer($dialog-footer-padding: 6px 0 6px 6px,$dialog-footer-bg:#ebebeb);
+           
+    }
+}
+
+.membershipgrid 
+{
+    .ui-dialog{
+           @include dialog($dialog-width:75%,$dialog-border-radius:4px);
+        padding:4px;
+    }
+    .ui-dialog-titlebar{
+        @include dialog-header($dialog-header-padding:0,$dialog-header-align:left);
+        .ui-dialog-titlebar-icon{
+            @include dialog-header-close-icon();
+        }            
+        .ui-dialog-title{
+            @include dialog-header-title($dialog-header-title-size:14px,$dialog-header-title-font-family:$fdx-font-bold);
+            padding-left: 10px; 
+        }
+    }
+    .ui-dialog-content{
+        @include dialog-content(
+            $dialog-content-padding: 12px 10px,
+            $dialog-content-bg: #fff,
+            $dialog-content-margin:5px 0 0,
+            $dialog-content-color:$highlight-color
+            );
+            font-weight: $fdx-font-weight;
+            font-family: $fdx-font-bold;
+    }
+    .ui-dialog-footer{
+        @include dialog-footer($dialog-footer-padding: 6px 0 6px 6px,$dialog-footer-bg:#ebebeb);
+           
+    }
+}

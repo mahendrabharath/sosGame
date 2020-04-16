@@ -1,0 +1,255 @@
+/* combobox */
+
+$dropdown-width: 100%;
+$dropdown-color: $highlight-color;
+$dropdown-fontsize: $form-font-size;
+$dropdown-border: $default-border;
+$dropdown-borderradius:0;
+$dropdown-padding:3px 6px 2px;
+$dropdown-lineheight: 28px;
+$dropdown-focus-border-color:$default-focus-border-color;
+$dropdown-caret-color: $fdx-primary-color;
+$dropdown-carent-right-gutter: 15px;
+$dropdown-carent-size: 20px;
+$dropdown-panel-boxshadow-switch: custom; // default | custom 
+$dropdown-panel-boxshadow: none;
+$dropdown-panel-padding: 0 0 0 5px;
+$dropdown-panel-font-size: $form-font-size;
+$dropdown-panel-border-type: solid;
+$dropdown-panel-border-width: 1px;
+$dropdown-panel-border-color: $default-border-color;
+$dropdown-panel-hover-border-color: $fdx-primary-color;
+$dropdown-panel-focus-border-color: $fdx-primary-color;
+$dropdown-panel-background-color: $list-bg;
+$dropdown-panel-item-border-type: solid;
+$dropdown-panel-item-border-width: 0 0 0 5px;
+$dropdown-panel-item-border-color: transparent transparent transparent $list-bg;
+$dropdown-panel-item-margin: 0 0 0 -5px;
+$dropdown-panel-item-lineheight: 30px;
+$dropdown-panel-item-padding:0 10px;
+$dropdown-panel-item-border-type: solid;
+$dropdown-panel-item-border-width: 0 0 0 5px;
+
+/* Tab view */
+$tab-background-color:  #FD5B29;
+$tab-border: #fcfcfc;
+$tab-color: white;
+$tab-font-family: "PMNCaeciliaW01-55Roman";
+$tab-font-size: 14px;
+$tab-height: 37px;
+$tab-min-width: 71px;
+$tab-padding: 7px 5px;
+$tab-border-radius: 0;
+$tab-text-transform: uppercase;
+$tab-cursor: pointer;
+
+/* dialogue */
+///Primeng dialog width - auto or say, any value in px or any other css unit. 
+$dialog-width: auto;
+///Primeng dialog shadow - none or say rgba(0, 0, 0, 0.3) 0px 1px 3px 0px.
+$dialog-shadow: none;
+///Primeng dialog background-color - #fcfcfc or say, #ccc or in rgb.
+$dialog-bg:$default-bg;
+///Primeng dialog border-radius - 0 or say, enter only one value in px or any other css unit.
+$dialog-border-radius:0;
+///Primeng dialog header padding - 30px or say 0.5em 0.75em.
+$dialog-header-padding: 30px;
+///Primeng dialog header align - center or say left, right or none. 
+$dialog-header-align: center;
+///Primeng dialog header background-color - #fcfcfc or say, #ccc or in rgb.
+$dialog-header-bg: $default-bg;
+///Primeng dialog header close icon color - #848484 or say,#ccc or in rgb.
+$dialog-header-close-icon-color: $label-color;
+///Primeng dialog header close icon position - absolute or say, relative/fixed or any css unit. 
+$dialog-header-close-icon-position: absolute;
+///Primeng dialog header close icon position right - 0 or say, value in px or any other css unit.
+$dialog-header-close-icon-position-right: 0;
+///Primeng dialog header close icon position top - 0 or say, value in px or any other css unit.
+$dialog-header-close-icon-position-top: 0;
+///Primeng dialog close icon over background-color - transparent or say, #ccc or in rgb.
+$dialog-header-close-icon-hover-bg: transparent;
+///Primeng dialog close icon over border-color - transparent or say, #ccc or in rgb.
+$dialog-header-close-icon-hover-border-color: transparent;
+///Primeng dialog close icon over font color - #333 or say, #ccc or in rgb.
+$dialog-header-close-icon-hover-color: $highlight-color;
+///Primeng dialog header title color - #4d4d4d or say, #ccc or in rgb.
+$dialog-header-title-color:#4d4d4d;
+///Primeng dialog header title font-size - 24px or say, any value in px or any other css unit.
+$dialog-header-title-size: 24px;
+///Primeng dialog header title font-weight - 300 or say, any other css unit.
+$dialog-header-title-weight: 300;
+/// Primeng dialog header title font-family - PMNCaeciliaW01-45Light or say, PMNCaeciliaW01-55Roman, PMNCaeciliaW01-75Bold and PMNCaeciliaW01-85Heavy.
+$dialog-header-title-font-family: $fdx-font-light;
+///Primeng dialog content margin - 0px 30px 30px or say, value in px or any other css unit.
+$dialog-content-margin: 0px 30px 30px;
+///Primeng dialog content padding - 20px 20px 5px 20px or say, value in px or any other css unit.
+$dialog-content-padding: 20px 20px 5px 20px;
+///Primeng dialog content height - auto or say, value in px or any other css unit.
+$dialog-content-height: auto;
+///Primeng dialog content max-height - 500px or say, value in px or any other css unit.
+$dialog-content-max-height: 500px;
+///Primeng dialog content scroll - scroll or say, any other css unit.
+$dialog-content-scroll: scroll;
+///Primeng dialog content background color - rgba(242, 243, 245, 0.5) or say, #ccc or in rgb.
+$dialog-content-bg:rgba(242, 243, 245, 0.5);
+///Primeng dialog content color - #878787 or say, #ccc or in rgb.
+$dialog-content-color: $label-color;
+$dialog-footer-padding: 0 0 40px;
+$dialog-footer-align: center;
+$dialog-footer-border: none;
+
+/* input box */
+
+///Primeng inputbox background-color - #fcfcfc or say, #ccc or in rgb.
+$input-bg:$default-bg;
+///Primeng inputbox font-size - 13px or say, value in px or any other css unit.
+$input-font-size:$form-font-size;
+///Primeng inputtext padding - 0px 15px or say, value in px or any other css unit.
+$input-padding: 0 15px;
+///Primeng inputtext border-radius - 0px or say, value in px or any other css unit.
+$input-border-radius: 0px;
+///Primeng inputtext height - 35px or say, value in px or any other css unit.
+$input-height:$element-height;
+///Primeng inputtext color - #878787 or say, #ccc or in rgb.
+$input-color: $input-color;
+/// Primeng inputtext font-family - PMNCaeciliaW01-55Roman or say, PMNCaeciliaW01-45Light, PMNCaeciliaW01-75Bold and PMNCaeciliaW01-85Heavy.
+$input-font-family: $fdx-font-roman;
+/// Primeng inputtext border - 1px solid #d3d3d3 or say, any css unit.
+$input-border: $default-border;
+/// Primeng inputtext outline - none or say any css unit.
+$input-outline: none;
+
+///Primeng inputtext error massages backbround-color - transparent or say, #ccc or in rgb.
+$error-bg: transparent;
+///Primeng inputtext error massages color - #cf4c35 or say, #ccc or in rgb.
+$error-color: $fdx-invalid-color;
+///Primeng inputtext error massages font - normal 14px/16px PMNCaeciliaW01-55Roman or say, any css unit.
+$error-font: $fdx-font-weight 14px/16px $fdx-font-roman;
+///Primeng inputtext error massages padding - 2px 2px 2px 0px or say, value in px or any other css unit.
+$error-padding:2px 2px 2px 0px;
+///Primeng inputtext error massages border - none or say, value in px or any other css unit.
+$error-border: none;
+
+/* overlay */
+///Primeng overlaypanel border-radius - 0px or say, value in px or any other css unit.
+$overlaypanel-border-radius:0px;
+///Primeng overlaypanel box-border - none or say, value in px or any other css unit.
+$overlaypanel-box-shadow: none;
+///Primeng overlaypanel border style - solid or say dashed/square, or any other css unit.
+$overlaypanel-border-style:solid;
+///Primeng overlaypanel border-width - 1px or say, value in px or any other css unit.
+$overlaypanel-border-width:1px;
+///Primeng overlaypanel border-color - #d3d3d3 or say, #ccc or in rgb.
+$overlaypanel-border-color:#d3d3d3;
+///Primeng overlaypanel background - #E9E9E9 or say, #ccc or in rgb.
+$overlaypanel-background:#E9E9E9;
+///Primeng overlaypanel width - 23% or say, value in px or any other css unit.
+$overlaypanel-width: 23%;
+///Primeng overlaypanel height - auto or say, value in px or any other css unit.
+$overlaypanel-height: auto;
+///Primeng overlaypanel maximum height - 400px or say, value in px or any other css unit.
+$overlaypanel-max-height: 400px;
+///Primeng overlaypanel overflow - auto or say scroll/none, or any other css unit.
+$overlaypanel-overflow: auto;
+
+///Primeng overlaypanel item padding - 0px 10px or say, value in px or any other css unit.
+$overlaypanel-item-padding:$list-item-padding;
+///Primeng overlaypanel item border style - solid or say dashed/square, or any other css unit.
+$overlaypanel-item-border-style:solid;
+///Primeng overlaypanel item border width - 5px or say, value in px or any other css unit.
+$overlaypanel-item-border-width:5px;
+///Primeng overlaypanel item background - #E9E9E9 or say, #ccc or in rgb.
+$overlaypanel-item-border-color:#E9E9E9;
+///Primeng overlaypanel item color - #E9E9E9 or say, #ccc or in rgb.
+$overlaypanel-item-color:$label-color;
+///Primeng overlaypanel item font size - 14px or say, value in px or any other css unit.
+$overlaypanel-item-font-size: 14px;
+///Primeng overlaypanel item font weight - normal or say, bold/italic or say, any other css unit.
+$overlaypanel-item-font-weight: $fdx-font-weight;
+/// Primeng overlaypanel item font family - PMNCaeciliaW01-55Roman or say, PMNCaeciliaW01-45Light, PMNCaeciliaW01-75Bold and PMNCaeciliaW01-85Heavy.
+$overlaypanel-item-font-family: $fdx-font-roman;
+///Primeng overlaypanel item cursor - pointer or say, value in default or any other css unit.
+$overlaypanel-item-cursor:$hand-cursor;
+///Primeng overlaypanel item line height - 30px  or say, value in px or any other css unit.
+$overlaypanel-item-line-height:$list-line-height;
+
+///Primeng overlaypanel item hover border-width - 5px or say, value in px or any other css unit.
+$overlaypanel-item-over-border-width: 5px;
+///Primeng overlaypanel item hover border style - solid or say dashed/square, or any other css unit.
+$overlaypanel-item-over-border-style: solid;
+///Primeng overlaypanel item hover color - #f05b29 or say, #ccc or in rgb.
+$overlaypanel-item-over-border-color: $fdx-primary-color;
+///Primeng overlaypanel item hover backgroung - #F9F9F9 or say, #ccc or in rgb.
+$overlaypanel-item-over-background: $list-hover-bg;
+///Primeng overlaypanel item hover color - #333333 or say, #ccc or in rgb. 
+$overlaypanel-item-over-color: $highlight-color;
+
+/* radiobutton */
+/// Primeng radiobox background-color - #eeeeee or say, #cccccc or in rgb.
+$radio-bg:#eeeeee;
+/// Primeng radiobox font-size - 13px or say, any value in px or any other css unit. 
+$radio-font-size:12px;
+/// Primeng radio border-radius - 100% or say, any value in px or any other css unit. 
+$radio-bor-radius:100%;
+/// Primeng radiobox width - 15px or say, any value in px or any other css unit. 
+$radio-width: 20px;
+/// Primeng radiobox height - 15px or say, any value in px or any other css unit. 
+$radio-height: 20px;
+/// Primeng token border - 1px solid #d3d3d3 or say, any other css unit. 
+$radio-border: $default-border;
+
+
+
+/* Checkbox */
+/// Primeng checkbox background-color - #FFFFFF or say, #cccccc or in rgb.
+$check-bg:#fff;
+/// Primeng checkbox font-size - 13px or say, any value in px or any other css unit. 
+$check-font-size:13px;
+/// Primeng checkbox border-radius - 0px or say, any value in px or any other css unit. 
+$check-bor-radius: 0px;
+/// Primeng checkbox width - 15px or say, any value in px or any other css unit. 
+$check-width: 15px;
+/// Primeng checkbox height - 15px or say, any value in px or any other css unit. 
+$check-height: 15px;
+/// Primeng checkbox border type - solid,dashed or any other css border style.
+$check-border-style: solid;
+/// Primeng checkbox width - 1px or say, value in px or any other css unit.
+$check-border-width: 1px;
+/// Primeng checkbox border-color - #979797 or say, #cccccc or in rgb.
+$check-border-color: #979797;
+
+ 
+/// Primeng checkbox label font color - #878787 or say, #cccccc or in rgb.
+$check-box-label-color:$label-color;
+/// Primeng checkbox label font-size - 13px or say, any value in px or any other css unit. 
+$check-box-label-font-size:$form-font-size;
+/// Primeng checkbox font-family - PMNCaeciliaW01-55Roman or say, PMNCaeciliaW01-45Light, PMNCaeciliaW01-75Bold and PMNCaeciliaW01-85Heavy.
+$check-box-label-font-family: $fdx-font-roman;
+
+/* Search Box */
+/// Primeng searchbox font-size - 13px or say, any value in px or any other css unit. 
+$searchbox-font-size:$form-font-size;
+/// Primeng searchbox background-color - #fcfcfc or say, #cccccc or in rgb.
+$searchbox-bg:$default-bg;
+/// Primeng searchbox font-family - PMNCaeciliaW01-55Roman or say, PMNCaeciliaW01-45Light, PMNCaeciliaW01-75Bold and PMNCaeciliaW01-85Heavy.
+$searchbox-font-roman:$fdx-font-roman;
+/// Primeng searchbox height - 35px or say, any value in px or any other css unit. 
+$searchbox-height:$element-height;
+/// Primeng searchbox icon font color - rgba(135, 135, 135, 0.7) or say, #cccccc or in rgb.
+$searchbox-icon-color:rgba(135, 135, 135, 0.7);
+/// Primeng searchbox icon font-size - 16px or say, any value in px or any other css unit. 
+$searchbox-icon-size: 16px;
+/// Primeng searchbox line-height - 32px or say, any value in px or any other css unit. 
+$searchbox-inner-size: 32px;
+/// Primeng token background-color - #e6e6e6 or say, #cccccc or in rgb.
+$searchbox-token-bg: #e6e6e6;
+/// Primeng token border - 1px solid #e6e6e6 or say, any other css unit. 
+$searchbox-token-border:1px solid #e6e6e6;
+/// Primeng searchbox icon content - \f002 or say, any other css unit. 
+$searchbox-icon: "\f002";
+/// Primeng searchbox padding - 0 15px or say, any value in px or any other css unit. 
+$searchbox-padding: 0 15px;
+/// Primeng searchbox border - none or say, any other css unit. 
+$searchbox-border: none;
+
+/* spinner */

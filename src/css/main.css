@@ -1,0 +1,64 @@
+
+/* ------------------------------------------------------------------ */
+.cell-top {
+    fill: black;
+    animation: svg-fill;
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+}
+
+.cell-topRight {
+    animation: svg-fill;
+    animation-duration: 0.5s;
+    animation-delay: 125ms;
+}
+
+.cell-right {
+    animation: svg-fill;
+    animation-duration: 0.5s;
+    animation-delay: 250ms;
+}
+
+.cell-bottomRight {
+    animation: svg-fill;
+    animation-duration: 0.5s;
+    animation-delay: 375ms;
+}
+
+.cell-bottom {
+    animation: svg-fill;
+    animation-duration: 0.5s;
+    animation-delay: 500ms;
+}
+
+
+.cell-bottomLeft {
+    animation: svg-fill;
+    animation-duration: 0.5s;
+    animation-delay: 625ms;
+}
+
+.cell-left {
+    animation: svg-fill;
+    animation-duration: 0.5s;
+    animation-delay: 750ms;
+}
+
+
+
+.cell-topLeft {
+    animation: svg-fill;
+    animation-duration: 0.5s;
+    animation-delay: 875ms;
+}
+
+@keyframes svg-fill {
+    from {
+        fill: rgb(30, 93, 148);
+    }
+
+    to {
+        fill: rgb(77, 127, 171);
+    }
+}
+

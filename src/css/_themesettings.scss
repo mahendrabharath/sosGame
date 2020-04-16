@@ -1,0 +1,89 @@
+
+//button configurations
+///Custom button background-color - primary color or say, #ccc or in rgb.
+$button-background:$fdx-primary-color;
+///Custom button background-color - #c3c3c3 or say, transparent or in rgb.
+$disabled-button-color:$disabled-color;
+///Custom button height - enter only one value in px or any other css unit.
+$button-height:37px;
+///Custom button width - enter only one value in px or any other css unit.
+$button-width: 71px;
+///Custom button border - it can be none, or say any other css unit.
+$button-border: 1px solid #fcfcfc;  
+///Custom button border-radius - enter only one value in px or any other css unit.
+$button-border-radius: 0; 
+///Custom button color - white or say,#ccc or transparent or in rgb
+$button-color: white;
+///Custom button outline -  1px solid primary color or say, none or in any other css unit.
+$button-outline: 1px solid $fdx-primary-color;
+///Custom button font-size - enter only one value in px or any other css unit.
+$button-font-size: 14px;
+///Custom button font-family - PMNCaeciliaW01-75Bold or say, PMNCaeciliaW01-55Roman, PMNCaeciliaW01-45Light and PMNCaeciliaW01-85Heavy.
+$button-font-family:$fdx-font-bold;
+///Custom button padding - any value in px or any other css unit.
+$button-padding:7px 5px;
+///Custom button text-tranform - uppercase/lowercase or any other css unit.
+$button-text-tranform: capitalize;
+///Custom button cursor - default/auto or any other css unit.
+$button-cursor: pointer;
+
+//label configurations
+///Label base font-size - enter only one value in px or any other css unit.
+$label-font-size:14px;
+///Label base margin - enter only one value in px or any other css unit.
+$label-margin:8px 0;
+///Label base padding - enter only one value in px or any other css unit.
+$label-padding:0;
+///Label base line height - enter only one value in px or any other css unit.
+$label-line-height:10px;
+///Label base color - #848484 or say, transparent or in rgb.
+$label-color:#848484;
+///Label base font-family - PMNCaeciliaW01-75Bold or say, PMNCaeciliaW01-55Roman, PMNCaeciliaW01-45Light and PMNCaeciliaW01-85Heavy.
+$label-font-family: $fdx-font-bold;
+///Label base display - block or any other css unit.
+$label-display:inline-block;
+
+//settings configuration
+///Custom setteing's button width - enter only one value in px or any other css unit.
+$settings-width:55px;
+///Custom setteing's button height - enter only one value in px or any other css unit.
+$settings-height:30px;
+///Custom setteing's button color - #848484 or say #ccc, transparent or in rgb.
+$settings-color:$label-color;
+///Custom setteing's button margin - enter only one value in px or any other css unit.
+$settings-margin:10px 0;
+///Custom setteing's button border radius - enter only one value in px or any other css unit.
+$settings-border-radius:2px;
+///Custom setteing's button border - 1px solid #d3d3d3 or any other css unit.
+$settings-border:none;
+
+
+
+
+//form configuration
+///Custom form error border-color - #cf4c35 or say transparent or in rgb.
+$form-error-border-color:  #cf4c35;
+///Custom form font-size - enter only one value in px or any other css unit.
+$form-font-size:13px;
+///Custom form group margin-bottom - enter only one value in px or any other css unit.
+$from-group-margin-bottom:15px;
+///Custom form asterisk symbol color - #cf4c35 or say transparent or in rgb.
+$from-asterisk-color: $form-error-border-color;
+///Custom form asterisk symbol font size - enter only one value in px or any other css unit.
+$form-astrisk-font-size: 15px;
+///Custom form asterisk symbol line-height - enter only one value in px or any other css unit.
+$form-astrisk-line-height: 10px;
+
+//input configurations
+$input-color: #878787;
+
+//overlay configurations
+$overlay-bg: rgba(0, 0, 0, 0.5);
+
+//fdx-layout configurations
+///Custom column width - enter only one value in px or any other css unit.
+$column-width:auto;
+///Custom column padding - enter any four values in px or any other css unit.
+$column-padding:0;
+///Custom column float - left/right or any other css unit.
+$column-float:left;

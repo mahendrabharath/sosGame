@@ -1,0 +1,125 @@
+///@group Primeng-components
+///@param {String} $overlaypanel-background [#E9E9E9] - The background-color of the overlaypanel
+///@param {Number} $overlaypanel-width [23%] - The width of the overlaypanel
+///@param {String} $overlaypanel-height [auto] - The height of the overlaypanel
+///@param {Number} $overlaypanel-max-height [400px]- The maximum height of the overlaypanel
+///@param {String} $overlaypanel-overflow [auto]- The overflow of the overlaypanel
+///@param {String} $overlaypanel-border [1px solid #d3d3d3] - The border of the overlaypanel
+///@param {Number} $overlaypanel-border-radius [0px]- The border-radius of the overlaypanel
+///@param {String} $overlaypanel-box-shadow [none] - The border-shadow of the overlaypanel
+///@output 'background-color', 'width', 'height', 'max-height', 'overflow', 'border', 'border-radius', and 'border-shadow' with fallback
+
+@mixin overlaypanel(
+    $overlaypanel-border-radius:$overlaypanel-border-radius,
+    $overlaypanel-box-shadow:$overlaypanel-box-shadow,
+    $overlaypanel-border: $overlaypanel-border-width $overlaypanel-border-style $overlaypanel-border-color,
+    $overlaypanel-background:$overlaypanel-background,
+    $overlaypanel-width:$overlaypanel-width,
+    $overlaypanel-height:$overlaypanel-height,
+    $overlaypanel-max-height:$overlaypanel-max-height,
+    $overlaypanel-overflow:$overlaypanel-overflow
+    ){
+        border-radius: $overlaypanel-border-radius,;
+	    box-shadow: $overlaypanel-box-shadow;
+	    border: $overlaypanel-border;
+	    background: $overlaypanel-background;
+	    width: $overlaypanel-width;
+	    height: $overlaypanel-height;
+	    max-height:$overlaypanel-max-height;
+	    overflow: $overlaypanel-overflow;
+}
+
+///@group Primeng-components
+///@param {Number} $overlaypanel-item-padding [0 10px] - The padding of the overlaypanel-item
+///@param {String} $overlaypanel-item-border-left [5px solid #E9E9E9] - The border-left of the overlaypanel-item
+///@param {String} $overlaypanel-item-color [#848484] - The color of the overlaypanel-item
+///@param {String} $overlaypanel-item-font [normal 14px PMNCaeciliaW01-55Roman]- The font of the overlaypanel-item
+///@param {String} $overlaypanel-item-cursor [pointer]- The cursor of the overlaypanel-item
+///@param {Number} $overlaypanel-item-line-height [30px] - The line-height of the overlaypanel-item
+///@output 'padding', 'border-left', 'color', 'font', 'cursor' and 'line-height' with fallback
+
+@mixin overlaypanel-item(
+    $overlaypanel-item-padding:$overlaypanel-item-padding,
+    $overlaypanel-item-border:$overlaypanel-item-border-width $overlaypanel-item-border-style $overlaypanel-item-border-color,
+    $overlaypanel-item-color:$overlaypanel-item-color,
+    $overlaypanel-item-font: $overlaypanel-item-font-weight $overlaypanel-item-font-size $overlaypanel-item-font-family,
+    $overlaypanel-item-cursor:$overlaypanel-item-cursor,
+    $overlaypanel-item-line-height:$overlaypanel-item-line-height
+    ){
+        padding: $overlaypanel-item-padding;
+        border-left: $overlaypanel-item-border;
+        color: $overlaypanel-item-color;
+        font: $overlaypanel-item-font;
+        cursor: $overlaypanel-item-cursor;
+        line-height: $overlaypanel-item-line-height;        
+    }
+
+///@group Primeng-components
+///@param {String} $overlaypanel-item-over-background [#F9F9F9] - The border-left of the overlaypanel-item
+///@param {String} $overlaypanel-item-over-color [#333333] - The color of the overlaypanel-item
+///@param {String} $overlaypanel-item-over-border-left [5px solid $primary-color] - The padding of the overlaypanel-item
+///@output 'background', 'color' and 'border-left' with fallback
+
+@mixin overlaypanel-item-over(
+	$overlaypanel-item-over-background:$overlaypanel-item-over-background,
+    $overlaypanel-item-over-color:$overlaypanel-item-over-color,
+    $overlaypanel-item-over-border-left:$overlaypanel-item-over-border-width $overlaypanel-item-over-border-style $overlaypanel-item-over-border-color
+    
+){
+    background: $overlaypanel-item-over-background;
+    color: $overlaypanel-item-over-color;
+    border-left: $overlaypanel-item-over-border-left;
+}
+.overlay{
+    .ui-overlaypanel{
+        @include overlaypanel($overlaypanel-width:170px);
+        .ui-overlaypanel-content{
+            padding: 0px;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            hr{
+                margin:0px;
+            }
+            li{
+                @include overlaypanel-item();
+                &:hover{
+                    @include overlaypanel-item-over();
+                }
+            }
+        }
+    }
+}
+.ag-grid-overlay {
+	.ui-overlaypanel{
+	    @include overlaypanel();
+	    .ui-overlaypanel-content{
+	        padding: 0px;
+	    }
+	    ul{
+            margin: 0;
+            padding: 0;	        
+	        list-style: none;
+	        hr{
+	            margin:0px;
+	        }
+	        li{
+	            @include overlaypanel-item($overlaypanel-item-cursor:default,$overlaypanel-item-border:none);
+                &:hover{
+                    @include overlaypanel-item-over($overlaypanel-item-over-border-left:none);
+                }
+            }
+            
+            li .ag-icon-checkbox-checked,
+            li .ag-icon-checkbox-unchecked {
+                cursor: $hand-cursor;
+                margin-right: 10px;
+                &:before{
+                    background-color: $overlaypanel-item-over-background;
+                }
+            }
+	    }
+    }
+}

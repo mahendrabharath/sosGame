@@ -1,0 +1,59 @@
+{
+    "source": "./src",
+    "destination": "./docss",
+    "includes": [
+        ".*\\.js",
+        ".*\\.jsx"
+    ],
+    "plugins": [
+        {"name": "esdoc-exclude-source-plugin"},
+        {"name": "esdoc-inject-script-plugin", "option": {"enable": true, "scripts": ["./material.js"]}},
+        {
+            "name": "esdoc-integrate-manual-plugin",
+            "option": {
+              "index": "./manual/index.md",
+              "globalIndex": true,
+             
+              "files": [
+                "./manual/overview.md",
+                "./manual/design.md",
+                "./manual/installation.md",
+                "./manual/usage1.md",
+                "./manual/usage2.md",
+                "./manual/tutorial.md",
+                "./manual/configuration.md",
+                "./manual/example.md",
+                "./manual/advanced.md",
+                "./manual/faq.md"
+     
+              ]
+            }
+          },
+        {
+            "name": "esdoc-standard-plugin",
+            "option": {
+                "lint": {"enable": true},
+                "coverage": {"enable": true},
+                "brand": {
+                    "title": "React Document",
+                    "logo": "./assets/images/logo.jpg"
+                }
+            }
+        },
+        {
+            "name": "esdoc-jsx-plugin",
+            "option": {
+                "enable": true
+            }
+        },
+        {
+            "name": "esdoc-inject-style-plugin",
+            "option": {
+                "enable": false,
+                "styles": [
+                    "./assets/CSS/style.css"
+                ]
+            }
+        }
+    ]
+}

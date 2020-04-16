@@ -1,0 +1,23 @@
+@import 'utilities/reset';
+@import 'utilities/fonts';
+@import 'utilities/helpers/helpers-index';
+@import 'base/globalsettings';
+
+/*********** Theme ************/
+@import 'themesettings';
+
+/*********** Vendors ************/
+
+@import 'vendors/ag-components/ag-index';
+@import 'vendors/primeng-components/primeng-index';
+
+/*********** Components/Modules ***********/
+
+@import 'components/buttons';
+@import 'components/label';
+
+/*********** Layouts ***********/
+
+@import 'layout/fdx-layouts';
+
+

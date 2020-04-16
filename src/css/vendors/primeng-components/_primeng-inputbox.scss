@@ -1,0 +1,73 @@
+///@group Primeng-components
+///@param {String} $input-bg [#fcfcfc] - The background-color of the inputtext box
+///@param {Number} $input-height [35px] - The height of the inputtext box
+///@param {String} $input-color [#878787] - The color of the inputtext box
+///@param {Number} $input-font-size [13px]- The font-size of the inputtext box
+///@param {String} $input-font-family [PMNCaeciliaW01-55Roman]- The font-family of the inputtext box
+///@param {String} $input-border [1px solid #d3d3d3] - The border of the inputtext box
+///@param {String} $input-border-radius [0px]- The border-radius of the inputtext box
+///@param {Number} $input-padding [0 15px] - The padding of the inputtext box
+///@param {String} $input-outline [none] - The outline of the inputtext box
+///@output 'background-color', 'height', 'color', 'font-size', 'font-family', 'border', 'border-radius', 'padding' and 'outline' with fallback
+
+@mixin inputbox(
+    $input-bg:$input-bg,
+    $input-height:$input-height,
+   	$input-color:$input-color,
+    $input-font-size:$input-font-size,
+    $input-font-family:$input-font-family,
+    $input-border:$input-border,
+    $input-border-radius:$input-border-radius,
+    $input-padding:$input-padding,
+    $input-outline:$input-outline
+    ) {
+    background: $input-bg; 
+    height:$input-height;
+    color:$input-color;
+    font-size:$input-font-size;
+    font-family:$input-font-family;
+    border:$input-border;
+    border-radius:$input-border-radius;
+    padding:$input-padding;
+    outline:$input-outline;
+    &:focus,
+    &:hover{        
+        border: $default-focus-border;
+        color: $highlight-color;
+    }
+}
+///@group Primeng-components
+///@param {String} $error-bg [transparent] - The background-color of the error massage for inputtext
+///@param {String} $error-color [#cf4c35] - The color of the error massage for inputtext
+///@param {String} $error-font [normal 14px/16px PMNCaeciliaW01-55Roman] - The font of the error massage for inputtext
+///@param {String} $error-border [none] - The border of the error massage for inputtext
+///@param {Number} $error-padding [2px 2px 2px 0px] - The padding of the error massage for inputtext
+///@output 'background-color', 'color', 'font', 'border', and 'padding'
+@mixin error-msg-inputtext(
+    $error-bg:$error-bg,
+    $error-color:$error-color,
+    $error-font:$error-font,
+    $error-border:$error-border,
+    $error-padding:$error-padding
+    ) {
+    padding: $error-padding;
+    color: $error-color;
+    font: $error-font;
+    background: $error-bg;
+    border: $error-border;      
+}
+.input-box{
+    @include inputbox();
+    width: 100%;
+}
+.text-area{
+	@include inputbox($input-height:60px,$input-padding:5px 15px);
+    width: 100%;
+}
+.ui-messages-error{   
+    @include error-msg-inputtext();   
+}
+.input-box.ng-invalid.ng-touched,
+.input-box.ng-touched.ng-invalid{
+    border: $fdx-invalid-border;
+}

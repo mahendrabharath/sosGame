@@ -1,0 +1,67 @@
+@import 'utilities/fonts';
+// $navBar-text-color: #5A5A5D;
+// $navBar-bg-color:#c3c3c3;
+
+//-----------------------color-----------------------//
+///Fdx primary color - #f05b29 or say, #ccc or transparent or in rgb.
+$fdx-primary-color:#f05b29;
+///Fdx invalid color - #cf4c35 or say, #ccc or transparent or in rgb.
+$fdx-invalid-color:#cf4c35;
+///Fdx invalid border - 1px solid #cf4c35 or say any other css unit.
+$fdx-invalid-border:1px solid $fdx-invalid-color;
+///Fdx default background-color - #fcfcfc or say, transparent or in rgb.
+$default-bg:#fcfcfc;
+///Fdx default border-color - #d3d3d3 or say, transparent or in rgb.
+$default-border-color : #d3d3d3;
+///Fdx default border - 1px solid #d3d3d3 or say any other css unit.
+$default-border:1px solid $default-border-color;
+///Fdx default border on focus - #979797 or say any other css unit.
+$default-focus-border-color: #979797;
+///Fdx default border on focus - 1px solid #979797 or say any other css unit.
+$default-focus-border:1px solid $default-focus-border-color;
+///Fdx disabled color - #c3c3c3 or say, #ccc or transparent or in rgb.
+$disabled-color:#c3c3c3;
+///Fdx highlighted color - #333333 or say, #ccc or transparent or in rgb.
+$highlight-color: #333333;
+
+//----------------------List------------------//s
+$list-bg:#E9E9E9;
+$list-hover-bg: #F9F9F9;
+$list-line-height: 30px;
+$list-word-break: break-all;
+$list-item-padding: 0 10px;
+$list-item-border:5px solid #E9E9E9;
+$list-item-highlighted:5px solid $fdx-primary-color;
+
+
+//---------------------other-------------------//
+$element-height:35px;
+$hand-cursor:pointer;
+$box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.25);
+
+
+/********************* Fonts ****************************************/
+///Fdx font-family roman - PMNCaeciliaW01-55Roman.
+$fdx-font-roman: "PMNCaeciliaW01-55Roman";
+///Fdx font-family light - PMNCaeciliaW01-45Light.
+$fdx-font-light:"PMNCaeciliaW01-45Light";
+///Fdx font-family italic - PMNCaeciliaW01-56Italic.
+$fdx-font-italic: "PMNCaeciliaW01-56Italic";
+///Fdx font-family bold - PMNCaeciliaW01-75Bold.
+$fdx-font-bold: "PMNCaeciliaW01-75Bold";
+///Fdx font-family heavy - PMNCaeciliaW01-85Heavy.
+$fdx-font-heavy: "PMNCaeciliaW01-85Heavy";
+///Fdx font-weight - normal/bold/lighter or say any other css unit.
+$fdx-font-weight:normal;
+
+
+/********************* inputText ****************************************/
+// $fdx-input-bg: #f7f7f7;
+// $fdx-input-padding: 0 5px;
+// $fdx-input-size:12px;
+
+
+
+
+
+

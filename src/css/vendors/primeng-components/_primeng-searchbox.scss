@@ -1,0 +1,152 @@
+///@group Primeng-components
+///@param {Number} $searchbox-inner-size [32px] - The min-height of the searchbox 
+///@param {String} $searchbox-bg [#fcfcfc]- The background-color of the searchbox
+///@param {String} $searchbox-font-roman [PMNCaeciliaW01-55Roman]- The font-family of the searchbox
+///@param {Number} $searchbox-font-size [13px]- The font-size of the searchbox
+///@param {Number} $searchbox-padding [0 15px]- The padding of the searchbox
+///@param {String} $searchbox-border [none]- The border of the searchbox
+///@output 'min-height', 'background-color', 'font-family', 'font-size', 'padding' and 'border'
+
+@mixin searchbox-inputtext(
+    $searchbox-height: $searchbox-height,
+    $searchbox-bg: $searchbox-bg,
+    $searchbox-font-roman: $searchbox-font-roman,
+    $searchbox-font-size: $searchbox-font-size,
+    $searchbox-padding: $searchbox-padding,
+    $searchbox-border: $searchbox-border
+){       
+    min-height:$searchbox-inner-size;   
+    border: $searchbox-border;
+    background-color: $searchbox-bg;
+    font-family: $searchbox-font-roman;
+    font-size: $searchbox-font-size;
+    color: $input-color;
+    padding: $searchbox-padding;
+    &:focus{
+        color: $highlight-color;            
+    }
+}
+
+///@group Primeng-components
+///@param {String} $searchbox-icon [\f002]- The content of the icon for searchbox
+///@param {Number} $searchbox-icon-size [16px]- The font-size of the icon for searchbox
+///@param {String} $searchbox-icon-color [rgba(135, 135, 135, 0.7)]- The color of the icon for searchbox
+///@output 'content', 'font-size' and 'color'
+@mixin searchbox-fa-caret(
+    $searchbox-icon:$searchbox-icon,
+    $searchbox-icon-size:$searchbox-icon-size,
+    $searchbox-icon-color:$searchbox-icon-color)
+{
+    content: $searchbox-icon;
+    font-size: $searchbox-icon-size;
+    color:$searchbox-icon-color;
+}
+.ui-autocomplete {
+    width: 100%;    
+    min-height:$element-height;      
+    height:auto; 
+    background-color: $default-bg;
+    border:$default-border;
+    &:hover{
+        border: $default-focus-border !important;
+    }
+    .ui-inputtext{
+        @include searchbox-inputtext();  
+        height:auto;
+        margin-left: 0.5px;
+        width: calc(100% - 35px);
+    }
+    .ui-inputtext::placeholder{    
+        color: $input-color;
+    }
+    .fa :hover{
+        color: $fdx-primary-color;
+    }
+    .fa-caret-down::before {
+        @include searchbox-fa-caret();
+        border:none;
+    }
+    .ui-autocomplete-dd .ui-autocomplete-dropdown.ui-corner-all, 
+    .ui-autocomplete-dd .ui-autocomplete-dropdown.ui-corner-all:hover{
+        border-radius:0;
+        height:$element-height;    
+        background-color: white;
+        border: $default-border;
+        border-left: none;       
+    }
+    .ui-widget.ui-button:enabled:hover,
+    .ui-autocomplete-dropdown{
+        border: none;
+        height: $searchbox-inner-size;
+        width: 34px;
+        background: $default-bg;
+        border-radius: 0px;
+        outline:0;
+    }
+    .ui-autocomplete-input-token{
+        height: $searchbox-inner-size;
+        padding: 0;
+        input{
+            @include searchbox-inputtext( $searchbox-padding:0);
+        }
+    }
+    .ui-autocomplete-multiple-container{
+        .ui-autocomplete-token{
+            border-radius: 3px;
+            background-color: $searchbox-token-bg;
+            border: $searchbox-token-border;
+            padding: 0 10px 0 5px;
+            margin: 5px 10px 5px 0px;
+            color: $highlight-color;
+            line-height: 20px;    
+            .ui-autocomplete-token-label{
+                white-space: normal;
+                word-break: break-word;
+            }
+        }  
+    }
+    .ui-autocomplete-panel {
+        border: $default-border;
+        border-top:none ;
+        box-shadow: none;
+        width: calc(100% + 2px) !important;
+        left: -1px !important;
+        top: calc(100% + 1px) !important;
+        .ui-autocomplete-list{
+            background-color: $list-bg;
+            padding: 0;
+            border-radius: 0px;
+        }
+        .ui-autocomplete-list-item{
+            margin: 0px;
+            padding: $list-item-padding;
+            border-left: $list-item-border;
+            line-height: $list-line-height;
+            color: $label-color;
+            font-size: $searchbox-font-size;
+            word-break: $list-word-break;
+            font-family: $fdx-font-roman;
+        }
+        .ui-autocomplete-list-item:hover,
+        .ui-autocomplete-list-item.ui-state-highlight{
+            border-left: $list-item-highlighted;
+            background: $list-hover-bg;
+            color: $highlight-color;
+    
+        }
+    }
+}  
+.ui-inputwrapper-focus .ui-autocomplete{        
+    border: $default-focus-border !important;
+    color: $highlight-color;
+}
+.ng-touched.ng-invalid .ui-autocomplete,
+.ng-invalid.ng-touched .ui-autocomplete{
+    border: $fdx-invalid-border;
+}
+.ng-valid.ng-pristine.ng-touched .ui-autocomplete,
+.ng-valid.ng-dirty.ng-touched .ui-autocomplete,
+.ng-untouched.ng-pristine.ng-valid .ui-autocomplete,
+.ng-untouched.ng-pristine.ng-invalid .ui-autocomplete{
+    border: $default-border;
+}

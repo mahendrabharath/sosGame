@@ -1,0 +1,97 @@
+///custom button
+
+///@group Components
+///@param {String} $button-background [$fdx-primary-color] - The background-color of the custom button
+///@param {String} $button-border [1px solid #fcfcfc] - The border of the custom button
+///@param {String} $button-color [white] - The color of the custom button
+///@param {String} $button-outline [1px solid $fdx-primary-color] - The outline of the custom button
+///@param {String} $button-font-family [PMNCaeciliaW01-75Bold] - The font-family of the custom button
+///@param {Number} $button-font-size [14px] - The font-size of the custom button
+///@param {Length} $button-height [37px] - The height of the custom button
+///@param {Length} $button-width [71px] - The width of the custom button
+///@param {Number} $button-padding [7px 5px] - The padding of the custom button
+///@param {Number} $button-border-radius [0px] - The border radius of the custom button
+///@param {String} $button-text-tranform [capitalize] - The text transform of the custom button
+///@param {String} $button-cursor [pointer] - The cursor of the custom button
+///@output 'background-color', 'border', 'color', 'outline', 'font-family','font-size', 'height', 'padding', 'border-radius', 'text transform', and 'cursor' with fallback
+
+@mixin custom-button(
+    $button-background:$button-background,
+    $button-border:$button-border,
+    $button-color:$button-color,
+    $button-outline:$button-outline,
+    $button-font-family:$button-font-family,
+    $button-font-size:$button-font-size,
+    $button-height:$button-height,
+    $button-width:$button-width,
+    $button-padding:$button-padding,
+    $button-border-radius:$button-border-radius,
+    $button-text-tranform:$button-text-tranform,
+    $button-cursor:$button-cursor
+) 
+{
+    background-color: $button-background;
+    border: $button-border;
+    color: $button-color;
+    font-family: $button-font-family;
+    font-size: $button-font-size;
+    height: $button-height;
+    min-width: $button-width;
+    padding:$button-padding;
+    border-radius: $button-border-radius;
+    text-transform: $button-text-tranform;
+    cursor: $button-cursor;
+    &:focus{
+        outline: $button-outline;
+    }
+}
+///@group Components
+///@param {Length} $settings-width [55px] - The width setting's button
+///@param {Length} $settings-height [30px] - The height setting's button
+///@param {String} $settings-color [#848484] - The color setting's button
+///@param {Number} $settings-margin [10px 0] - The margin setting's button
+///@param {String} $settings-border [none] - The border setting's button
+///@param {String} $settings-border-radius [2px] - The border-radius setting's button
+///@output 'width', 'height', 'color', 'margin', 'border' and 'border radius' with fallback
+
+@mixin settings-button(
+      $settings-width:$settings-width,
+      $settings-height:$settings-height,
+      $settings-color:$settings-color,
+      $settings-margin:$settings-margin,
+      $settings-border:$settings-border,
+      $settings-border-radius:$settings-border-radius
+) {
+     width:$settings-width;
+     height:$settings-height;
+     border:$settings-border;
+     color:$settings-color;
+     outline: 0;
+     cursor: $hand-cursor;
+     border-radius: $settings-border-radius;
+     margin:$settings-margin;
+
+}
+
+.gridSetBtn{
+    @include settings-button();
+}
+.individual-composite-gearicon{
+    @include settings-button($settings-margin: 0 0 10px 0);
+}
+.btn-md
+{
+    @include custom-button();
+}
+
+.createBtn[disabled]
+{
+  background: $disabled-button-color;
+  border: $disabled-button-color;
+  cursor: default;
+}
+
+.errorBtn{
+    @include custom-button($button-height:28px,$button-width:75px,$button-padding:0px 17px,$button-border-radius:3px,$button-border:1px solid #ebebeb);
+    cursor:$hand-cursor;
+}
