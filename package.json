@@ -47,7 +47,7 @@
     "scroll-to-element": "^2.0.0",
     "styled-components": "^2.1.1",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5",
+    "webpack-dev-server": "^3.1.11",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
@@ -111,7 +111,7 @@
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.9.2",
     "webpack-bundle-size-analyzer": "^2.7.0",
-    "webpack-dev-server": "^2.4.5",
+    "webpack-dev-server": "^3.1.11",
     "webpack-manifest-plugin": "2.0.0-rc.1",
     "webpack-merge": "^4.1.1"
   }
