@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Cell from './Cell';
-import { getSurroundingCells } from '../../helpers/utils';
+import { getSurroundingCells, copyData, getSecondSurroundingCells } from '../../helpers/utils';
 
 // cell style
 const patternRectStyle = {
@@ -28,69 +28,158 @@ const Cells = props => {
     const [cells, setCells] = useState([]);
     const [renderCount, setRenderCount] = useState(0)
     const trackerTemp = [];
+    const [strikeOuts, setStrikeOuts] = useState([])
 
     const setTrackerValue = (id, value, surroundingCells) => {
-        const eleIndex = trackerTemp.findIndex(el => el.key === id);
-        var newTracker = [...trackerTemp];
+        console.log('tracker is ', tracker)
+        const eleIndex = tracker.findIndex(el => el.key === id);
+        const newTracker = [...tracker];
         newTracker[eleIndex].value = value;
-
-        // refreshBoard();
+        setTracker(copyData(newTracker));
     }
 
     const setGlowClass = (x, y, selVal) => {
-        const height = patternRectHeight, width = patternRectWidth;
-        const surroundingCells = [];
-        let firstLevelMatch = false;
-        const pairVal = selVal === 'S' ? 'O' : 'S';
-
-
-        surroundingCells.push({ pos: 'top', key: `${x}-${y - height}` }) // cell's top key
-        surroundingCells.push({ pos: 'topRight', key: `${x + width}-${y - height}` }) // cell's top right corner key
-        surroundingCells.push({ pos: 'right', key: `${x + width}-${y}` }); // cell's right key
-        surroundingCells.push({ pos: 'bottomRight', key: `${x + width}-${y + height}` }) // cell's bottom right corner key
-        surroundingCells.push({ pos: 'bottom', key: `${x}-${y + height}` }) // cell's bottom key
-        surroundingCells.push({ pos: 'bottomLeft', key: `${x - width}-${y + height}` }) // cell's bottom left corner key
-        surroundingCells.push({ pos: 'left', key: `${x - width}-${y}` }); // cell's left key
-        surroundingCells.push({ pos: 'topLeft', key: `${x - width}-${y - height}` }) // cell's top left corner key
-        console.log('Created in cells ', surroundingCells)
-
-
-        for (const cell of surroundingCells) {
-            const eleIndex = trackerTemp.findIndex(el => el.key === cell.key);
-            if (eleIndex < 0) return;
-            var newTracker = [...trackerTemp];
-            newTracker[eleIndex].glowClass = cell.pos;
-            if (newTracker[eleIndex].value == pairVal) {
-                firstLevelMatch = true;
-                console.log('******* First level match found *******')
-            }
+        // if the given element is 'O', them iterate over elements around 'O', as its the center piece.
+        if (selVal === 'O') {
+            matchByO(x, y, selVal);
+        } else {
+            matchByS(x, y, selVal);
         }
-        refreshBoard();
-
-        setTimeout(() => {
-            for (const cell of surroundingCells) {
-                const eleIndex = trackerTemp.findIndex(el => el.key === cell.key);
-                if (eleIndex < 0) continue;
-                var newTracker = [...trackerTemp];
-                newTracker[eleIndex].glowClass = false;
-            }
-            refreshBoard();
-        }, 1000);
     }
 
-    // const setGlowClass = (cell, value) => {
-    //     console.log('Glowing cell ', cell)
-    //     const eleIndex = trackerTemp.findIndex(el => el.key === cell.key);
-    //     if (eleIndex < 0) return;
-    //     var newTracker = [...trackerTemp];
-    //     newTracker[eleIndex].glowClass = value && cell.pos;
+    const matchByO = (x, y, selVal) => {
+        const surroundingCells = getSurroundingCells(x, y, patternRectWidth, patternRectHeight); // [];
+        let firstLevelMatchIndex = -1;
+        let secondLevelMatchIndex = -1;
+        const pairVal = selVal === 'S' ? 'O' : 'S';
+        const tempStrikePoints = [];
+        let newTracker = [...tracker]
 
-    //     refreshBoard();
-    // }
+        for (let i = 0; i < surroundingCells.length; i += 2) {
+            const s1 = surroundingCells[i]
+            const s2 = surroundingCells[i + 1];
+
+            const eleIndex1 = tracker.findIndex(el => el.key === s1.key);
+            const eleIndex2 = tracker.findIndex(el => el.key === s2.key);
+            if (eleIndex1 < 0 || eleIndex2 < 0) continue;
+            newTracker[eleIndex1].glowClass = s1.pos;
+            newTracker[eleIndex2].glowClass = s2.pos;
+            if (newTracker[eleIndex1].value == pairVal && newTracker[eleIndex2].value == pairVal) {
+                firstLevelMatchIndex = eleIndex1;
+                secondLevelMatchIndex = eleIndex2;
+                const strikePointObj = {
+                    keys: [x + '-' + y, newTracker[eleIndex1].key, newTracker[eleIndex2].key],
+                    strikePoints: {
+                        x1: newTracker[eleIndex1].x,
+                        y1: newTracker[eleIndex1].y,
+                        x2: newTracker[eleIndex2].x,
+                        y2: newTracker[eleIndex2].y
+                    }
+                } // end obj
+                tempStrikePoints.push(strikePointObj);
+                console.log('******* First level match found at ', newTracker[eleIndex1], newTracker[eleIndex2], '*******')
+            } // end of if
+        }
+
+        setStrikeOuts(oldVals => [...oldVals, ...tempStrikePoints]);
+        removeGlow(surroundingCells, x, y, false);
+        setTracker(copyData(newTracker));
+        return;
+    }
+
+    const matchByS = (x, y, selVal) => {
+        let newTracker = [...tracker]
+        let firstLevelMatchIndex = -1;
+        let secondLevelMatchIndex = -1;
+        let firstLevelMatchPos = '';
+        const surroundingCells = getSurroundingCells(x, y, patternRectWidth, patternRectHeight); // [];
+        const pairVal = selVal === 'S' ? 'O' : 'S';
+
+        for (const cell of surroundingCells) {
+            const eleIndex = tracker.findIndex(el => el.key === cell.key);
+            if (eleIndex < 0) continue;
+            // newTracker = [...tracker];
+            newTracker[eleIndex].glowClass = cell.pos;
+            if (newTracker[eleIndex].value == pairVal) {
+                firstLevelMatchIndex = eleIndex;
+                firstLevelMatchPos = cell.pos;
+                console.log('******* First level match found at ', newTracker[eleIndex], '*******')
+            }
+        }
+
+
+        // checks for match at second level
+        if (firstLevelMatchIndex > -1 && selVal !== 'O') {
+            const secondSurrounding = getSecondSurroundingCells(x, y, patternRectWidth, patternRectHeight).filter(arg => arg.pos === firstLevelMatchPos);
+            for (const cell of secondSurrounding) {
+                const eleIndex = tracker.findIndex(el => el.key === cell.key);
+                if (eleIndex < 0) continue;
+                // newTracker = [...tracker];
+                newTracker[eleIndex].glowClass = cell.pos;
+                if (newTracker[eleIndex].value == selVal) {
+                    secondLevelMatchIndex = eleIndex;
+                    console.log('******* second level match found *******')
+                }
+            }
+        }
+        //If given element is 'S'
+        const matchFound = (firstLevelMatchIndex > -1 && secondLevelMatchIndex > -1);
+        matchFound && console.log('!!!!!!!! Match found !!!!!!');
+        // if there's a SOS match then strike out the cells.
+        if (matchFound) {
+            const currentCell = tracker.find(el => el.key === x + '-' + y);
+            currentCell.value = selVal;
+            const strikePoints = {};
+            const matchCells = [newTracker[firstLevelMatchIndex], newTracker[secondLevelMatchIndex], currentCell];
+            let coOrdinateCount = 1; // marks (x1, y1) (x2, y2) Since there's 3 elements in `matchCell` its limited to 2.
+            for (var cell of matchCells) {
+                // find the two extereme 'S' in the match
+                if (cell.value === 'S') {
+                    strikePoints['x' + coOrdinateCount] = cell.x;
+                    strikePoints['y' + coOrdinateCount] = cell.y;
+                    coOrdinateCount++;
+                }
+            }
+
+            const sprikePoints = {
+                keys: matchCells.map(ele => ele.key),
+                strikePoints//: { x1, y1, x2, y2 }
+            }
+            setStrikeOuts(oldVals => [...oldVals, sprikePoints]);
+        }
+
+        removeGlow(surroundingCells, x, y, firstLevelMatchIndex);
+
+        setTracker(copyData(newTracker));
+    }
+
+    // removes the className for glow after a second.
+    const removeGlow = (surroundingCells, x, y, firstLevelMatchIndex) => {
+        let newTracker = [...tracker]
+        // removes the set classes after the animation is complete
+        setTimeout(() => {
+            // newTracker = [];
+            for (const cell of surroundingCells) {
+                const eleIndex = tracker.findIndex(el => el.key === cell.key);
+                if (eleIndex < 0) continue;
+                newTracker[eleIndex].glowClass = false;
+            }
+            if (firstLevelMatchIndex > -1) {
+                const secondSurrounding = getSecondSurroundingCells(x, y, patternRectWidth, patternRectHeight)
+                for (const cell of secondSurrounding) {
+                    const eleIndex = tracker.findIndex(el => el.key === cell.key);
+                    if (eleIndex < 0) continue;
+                    newTracker[eleIndex].glowClass = false;
+                }
+            }
+            setTracker(copyData(newTracker));
+        }, 1000);
+    }
 
     const getValueById = id => tracker.find(el => el.key === id);
 
     const initialize = () => {
+        const tempTrackerFinal = [];
         // creating a (a X b) matrix for the board
         // first set the board y axis are initial height, then iterate over the cell height
         for (let y = start.y; y <= boardHeight; y += patternRectHeight) {
@@ -100,41 +189,46 @@ const Cells = props => {
                     key: x + '-' + y,
                     x, y,
                     value: '',
+                    striked: true,
                     glowClass: 0
                 };
                 trackerTemp.push(newEle);
-                tempCells.push(<Cell setGlowClass={setGlowClass} glowClass={0} getValueById={getValueById} setTrackerValue={setTrackerValue} key={x + '-' + y} x={x} y={y} width={patternRectWidth} height={patternRectHeight} {...patternRectStyle} />)
+                tempTrackerFinal.push(newEle);
             }
         }
-        // trackerTemp
-        setTracker(trackerTemp);
-        setCells(tempCells);
-        console.log({ trackerTemp });
-        refreshBoard()
-    }
 
-    const refreshBoard = () => {
-        tempCells = []
-        for (let x of trackerTemp) {
-            tempCells.push(<Cell
-                {...x}
-                getValueById={getValueById}
-                setTrackerValue={setTrackerValue}
-                width={patternRectWidth}
-                setGlowClass={setGlowClass}
-                height={patternRectHeight}
-                {...patternRectStyle}
-            />)
-        }
-        setCells(tempCells);
+        setTracker(copyData(tempTrackerFinal));
     }
 
     useEffect(() => {
         initialize();
     }, [])
 
-    // console.log(props, cells, tracker)
-    return <g>{cells}</g>
+    console.log('Strike out points are ', strikeOuts);
+
+    const getPolylinePoints = strikePoints => {
+        const { x1, y1, x2, y2 } = strikePoints;
+        // patternRectWidth, patternRectHeight
+        return `${x1 + (patternRectWidth / 2)},${y1 + (patternRectHeight / 2)} ${x2 + (patternRectWidth / 2)},${y2 + (patternRectHeight / 2)}`;
+    }
+
+    return <g>
+        {tracker.map(el => <Cell
+            setGlowClass={setGlowClass}
+            glowClass={el.glowClass}
+            getValueById={getValueById}
+            setTrackerValue={setTrackerValue}
+            key={el.x + '-' + el.y} x={el.x} y={el.y}
+            width={patternRectWidth}
+            value={el.value}
+            height={patternRectHeight}
+            {...patternRectStyle}
+        />)}
+        <g>
+            {strikeOuts.map(({ strikePoints }, i) => <polyline key={i} points={getPolylinePoints(strikePoints)}
+                style={{ fill: 'none', stroke: 'black', strokeWidth: '3' }} />)}
+        </g>
+    </g>
 }
 
 
