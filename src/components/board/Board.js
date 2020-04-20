@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Cells from './Cells';
+import { copyData } from '../../helpers/utils';
 
 // style for the board, i.e the table
 const outterRectStyle = {
@@ -24,20 +25,42 @@ const patternRectHeight = innerHeight * 0.05; // individual cell's height is 5% 
 
 console.log(boardDimensions)
 
-const Board = () => <div>
-    <svg width={innerWidth} height={innerHeight}>
-        <rect x={x} y={y} width={width} height={height} {...outterRectStyle} />
+const Board = () => {
+    const [playerTurn, setPlayerTurn] = useState('Siri');
+    const [score, setScore] = useState([{ name: 'Devs', score: 0 }, { name: 'Siri', score: 0 }]);
+    const setPlayerTurnColor = player => player === playerTurn ? '#ce1d1de8' : 'black';
 
-        <Cells start={{ x, y }}
-            patternRectWidth={Math.round(patternRectWidth)}
-            patternRectHeight={Math.round(patternRectHeight)}
-            boardWidth={Math.round(width)} boardHeight={Math.round(height)}
-        />
+    const changePlayer = () => setPlayerTurn(oldVal => oldVal === 'Siri' ? 'Devs' : 'Siri');
 
+    const setScoreToPlayer = (count) => {
+        const playerIndex = score.findIndex(arg => arg.name == playerTurn);
+        const prevScore = copyData(score);
+        prevScore[playerIndex].score += count;
+        setScore(prevScore);
+    }
 
-        {/* <rect x={x} y={y} width={patternRectWidth} height={patternRectHeight} {...patternRectStyle} />
+    return <div>
+        <div style={{ position: 'fixed', color: setPlayerTurnColor('Devs') }}><h2>P1: </h2><p>Devs - {score[0].score}</p></div>
+        <div><h2 className='playing'>{playerTurn}, playing</h2></div>
+        <svg width={innerWidth} height={innerHeight}>
+            <rect x={x} y={y} width={width} height={height} {...outterRectStyle} />
+
+            <Cells start={{ x, y }}
+                patternRectWidth={Math.round(patternRectWidth)}
+                patternRectHeight={Math.round(patternRectHeight)}
+                boardWidth={Math.round(width)} boardHeight={Math.round(height)}
+                changePlayer={changePlayer}
+                player={playerTurn}
+                setScoreToPlayer={setScoreToPlayer}
+            />
+
+            {/* <rect x={x} y={y} width={patternRectWidth} height={patternRectHeight} {...patternRectStyle} />
         <text x="100" y="150" fill="red">I love SVG!</text> */}
-    </svg>
-</div>
-
+        </svg>
+        <div style={{ position: 'absolute', top: '0px', right: '0px', padding: '5px', color: setPlayerTurnColor('Siri') }}>
+            <h2>P2: </h2>
+            <p>Siri - {score[1].score}</p>
+        </div>
+    </div>
+}
 export default Board;

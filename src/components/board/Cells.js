@@ -22,7 +22,7 @@ const patternRectHoverStyle = {
 
 // component for gathering all the cells.
 const Cells = props => {
-    const { start, boardWidth, boardHeight, patternRectHeight, patternRectWidth } = props;
+    const { start, boardWidth, boardHeight, patternRectHeight, patternRectWidth, changePlayer, player , setScoreToPlayer} = props;
     let tempCells = [];
     const [tracker, setTracker] = useState([]);
     const [cells, setCells] = useState([]);
@@ -45,6 +45,7 @@ const Cells = props => {
         } else {
             matchByS(x, y, selVal);
         }
+        changePlayer();
     }
 
     const matchByO = (x, y, selVal) => {
@@ -69,6 +70,7 @@ const Cells = props => {
                 secondLevelMatchIndex = eleIndex2;
                 const strikePointObj = {
                     keys: [x + '-' + y, newTracker[eleIndex1].key, newTracker[eleIndex2].key],
+                    player,
                     strikePoints: {
                         x1: newTracker[eleIndex1].x,
                         y1: newTracker[eleIndex1].y,
@@ -82,6 +84,7 @@ const Cells = props => {
         }
 
         setStrikeOuts(oldVals => [...oldVals, ...tempStrikePoints]);
+        setScoreToPlayer(tempStrikePoints.length);
         removeGlow(surroundingCells, x, y, false);
         setTracker(copyData(newTracker));
         return;
@@ -89,28 +92,40 @@ const Cells = props => {
 
     const matchByS = (x, y, selVal) => {
         let newTracker = [...tracker]
+
         let firstLevelMatchIndex = -1;
         let secondLevelMatchIndex = -1;
         let firstLevelMatchPos = '';
+
+        let firstLevelMatchIndexes = [];
+        let secondLevelMatchIndexes = [];
+        let firstLevelMatchPositions = [];
+
+        const tempStrikePoints = [];
+        // gets the first level surrounding cells, from the user clicked cell
         const surroundingCells = getSurroundingCells(x, y, patternRectWidth, patternRectHeight); // [];
         const pairVal = selVal === 'S' ? 'O' : 'S';
-
+        // lloops through the surrounding cells
         for (const cell of surroundingCells) {
             const eleIndex = tracker.findIndex(el => el.key === cell.key);
             if (eleIndex < 0) continue;
             // newTracker = [...tracker];
             newTracker[eleIndex].glowClass = cell.pos;
+            // if the surrounding cell has a match i.e, for SOS, User clicked cell is first 'S', so 'O' should be available in the surrounding
             if (newTracker[eleIndex].value == pairVal) {
                 firstLevelMatchIndex = eleIndex;
                 firstLevelMatchPos = cell.pos;
+                firstLevelMatchIndexes.push(eleIndex); // if 'O' is availble then push the Index and position in an array.
+                firstLevelMatchPositions.push(cell.pos);
                 console.log('******* First level match found at ', newTracker[eleIndex], '*******')
             }
         }
 
 
         // checks for match at second level
-        if (firstLevelMatchIndex > -1 && selVal !== 'O') {
-            const secondSurrounding = getSecondSurroundingCells(x, y, patternRectWidth, patternRectHeight).filter(arg => arg.pos === firstLevelMatchPos);
+        if (firstLevelMatchIndexes.length) {
+            const secondSurrounding = getSecondSurroundingCells(x, y, patternRectWidth, patternRectHeight)
+                .filter(arg => firstLevelMatchPositions.includes(arg.pos)); // filtering out by the position of first surrounding. so it avoids checking in non sequential areas
             for (const cell of secondSurrounding) {
                 const eleIndex = tracker.findIndex(el => el.key === cell.key);
                 if (eleIndex < 0) continue;
@@ -118,40 +133,60 @@ const Cells = props => {
                 newTracker[eleIndex].glowClass = cell.pos;
                 if (newTracker[eleIndex].value == selVal) {
                     secondLevelMatchIndex = eleIndex;
+                    secondLevelMatchIndexes.push(eleIndex);
+                    // gets the index of the match. since the match is checked by position filtered items, it ll be in the same order as firstLevelMatchINdexes
+                    const matchOCell = tracker[firstLevelMatchIndexes.shift()];
+                    
+                    tempStrikePoints.push({
+                        keys: [matchOCell.key, newTracker[eleIndex].key, x + '-' + y],
+                        strikePoints: {
+                            x1: x,
+                            y1: y,
+                            x2: newTracker[eleIndex].x,
+                            y2: newTracker[eleIndex].y
+                        }
+                    })
                     console.log('******* second level match found *******')
                 }
             }
         }
-        //If given element is 'S'
-        const matchFound = (firstLevelMatchIndex > -1 && secondLevelMatchIndex > -1);
-        matchFound && console.log('!!!!!!!! Match found !!!!!!');
-        // if there's a SOS match then strike out the cells.
-        if (matchFound) {
-            const currentCell = tracker.find(el => el.key === x + '-' + y);
-            currentCell.value = selVal;
-            const strikePoints = {};
-            const matchCells = [newTracker[firstLevelMatchIndex], newTracker[secondLevelMatchIndex], currentCell];
-            let coOrdinateCount = 1; // marks (x1, y1) (x2, y2) Since there's 3 elements in `matchCell` its limited to 2.
-            for (var cell of matchCells) {
-                // find the two extereme 'S' in the match
-                if (cell.value === 'S') {
-                    strikePoints['x' + coOrdinateCount] = cell.x;
-                    strikePoints['y' + coOrdinateCount] = cell.y;
-                    coOrdinateCount++;
-                }
-            }
 
-            const sprikePoints = {
-                keys: matchCells.map(ele => ele.key),
-                strikePoints//: { x1, y1, x2, y2 }
-            }
-            setStrikeOuts(oldVals => [...oldVals, sprikePoints]);
-        }
+        console.log('temporary strikes are ', tempStrikePoints);
+
+        //If given element is 'S'
+        // const matchFound = (firstLevelMatchIndex > -1 && secondLevelMatchIndex > -1);
+        // matchFound && console.log('!!!!!!!! Match found !!!!!!');
+        // if there's a SOS match then strike out the cells.
+        // if (matchFound) {
+        //     const currentCell = tracker.find(el => el.key === x + '-' + y);
+        //     currentCell.value = selVal;
+        //     const strikePoints = {};
+        //     const matchCells = [newTracker[firstLevelMatchIndex], newTracker[secondLevelMatchIndex], currentCell];
+        //     let coOrdinateCount = 1; // marks (x1, y1) (x2, y2) Since there's 3 elements in `matchCell` its limited to 2.
+        //     for (var cell of matchCells) {
+        //         // find the two extereme 'S' in the match
+        //         if (cell.value === 'S') {
+        //             strikePoints['x' + coOrdinateCount] = cell.x;
+        //             strikePoints['y' + coOrdinateCount] = cell.y;
+        //             coOrdinateCount++;
+        //         }
+        //     }
+
+        //     const sprikePoints = {
+        //         keys: matchCells.map(ele => ele.key),
+        //         strikePoints//: { x1, y1, x2, y2 }
+        //     }
+        //     setStrikeOuts(oldVals => [...oldVals, sprikePoints]);
+        // }
+        setStrikeOuts(oldVals => [...oldVals, ...tempStrikePoints]);
 
         removeGlow(surroundingCells, x, y, firstLevelMatchIndex);
 
+        setScoreToPlayer(tempStrikePoints.length);
+
         setTracker(copyData(newTracker));
     }
+
 
     // removes the className for glow after a second.
     const removeGlow = (surroundingCells, x, y, firstLevelMatchIndex) => {
@@ -189,6 +224,7 @@ const Cells = props => {
                     key: x + '-' + y,
                     x, y,
                     value: '',
+                    player: '',
                     striked: true,
                     glowClass: 0
                 };
