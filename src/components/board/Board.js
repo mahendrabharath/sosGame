@@ -20,13 +20,13 @@ const height = innerHeight - (innerHeight * 0.1); // leaves a gap of 0.1% for wi
 
 const boardDimensions = { x, y, width, height }
 
-const patternRectWidth = innerWidth * 0.05; // individual cell's width is 5% of the table's width
-const patternRectHeight = innerHeight * 0.05; // individual cell's height is 5% of the table's height
+const patternRectWidth = 40; // individual cell's width is 5% of the table's width
+const patternRectHeight = 40; // individual cell's height is 5% of the table's height
 
 console.log(boardDimensions)
 
 const Board = () => {
-    const [playerTurn, setPlayerTurn] = useState('Siri');
+    const [playerTurn, setPlayerTurn] = useState('Devs');
     const [score, setScore] = useState([{ name: 'Devs', score: 0 }, { name: 'Siri', score: 0 }]);
     const setPlayerTurnColor = player => player === playerTurn ? '#ce1d1de8' : 'black';
 
@@ -52,6 +52,7 @@ const Board = () => {
                 changePlayer={changePlayer}
                 player={playerTurn}
                 setScoreToPlayer={setScoreToPlayer}
+                score={score}
             />
 
             {/* <rect x={x} y={y} width={patternRectWidth} height={patternRectHeight} {...patternRectStyle} />

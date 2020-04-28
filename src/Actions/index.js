@@ -23,3 +23,5 @@ export const selectGrpId = value => ({type: actionTypes.SELECT_GROUP_ID, payload
 export const getGrpImages = value => ({type: actionTypes.GET_GROUP_IMAGES, payload: value});
 
 export const getGrpAllImages = value => ({type: actionTypes.GET_GROUP_ALL_IMAGES, payload: value});
+
+export const setupGame = value => ({type: actionTypes.SET_UP_GAME, payload: value});

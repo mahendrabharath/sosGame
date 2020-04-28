@@ -68,7 +68,7 @@
 polyline {
     stroke-dasharray: 200;
     stroke-dashoffset: 200;
-    animation: dash 5s linear normal 1;
+    animation: dash 1s linear normal 1;
     animation-fill-mode: forwards;
   }
   
@@ -110,3 +110,45 @@ polyline {
       width: 1.25em;    
     }
   }
+
+/* ---------------- Fly to score board ------------------------ */
+
+
+.demo-dot {
+  position: absolute;
+  animation: xAxis 2.5s 1 cubic-bezier(0.02, 0.01, 0.21, 1);
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+}
+/*   
+.demo-dot::after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: rgb(250, 0, 0);
+  animation: yAxis 2.5s 1 cubic-bezier(0.3, 0.27, 0.07, 1.64);
+  animation-fill-mode: forwards;
+}
+ */
+@keyframes yAxis {
+  50% {
+    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+    transform: translate(540px, 300px);
+  }
+  100% {
+    transform: translate(840px, 50px);
+  }
+}
+
+@keyframes xAxis {
+  50% {
+    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+    transform: translate(540px, 300px);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+    transform: translate(1140px, 50px);
+  }
+}

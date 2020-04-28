@@ -20,7 +20,7 @@ const patternRectHoverStyle = {
 
 // single cell component.
 const Cell = props => {
-    const { x, y, width, height, getValueById, setTrackerValue, glowClass, value, setGlowClass } = props; // dimentions of a cell
+    const { x, y, width, height, getValueById, setTrackerValue, glowClass, value, setGlowClass, index } = props; // dimentions of a cell
     const [recStyle, setStyle] = useState(Object.assign(patternRectStyle)); // change the style of the cell on hover
     const [ele, setEle] = useState(value);
 
@@ -28,7 +28,7 @@ const Cell = props => {
         console.log('Checkable cells are ', x, y, ' given val is -> ', val);
         setGlowClass(x, y, val)
 
-        setTrackerValue(x + '-' + y, val)
+        // setTrackerValue(x + '-' + y, val)
     }
 
     return <g>
@@ -51,6 +51,7 @@ const Cell = props => {
             onDoubleClick={() => { setEle('O'); checkForSOS('O') }}
         />
         <text x={x + (width * 0.5)} y={y + (height * 0.7)} fill="red">{value}</text>
+       {recStyle.style.strokeWidth === '7px' && <text x={x} y={y + 6} fontSize='6'>{index}</text>} 
     </g>
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cell from './Cell';
 import { getSurroundingCells, copyData, getSecondSurroundingCells } from '../../helpers/utils';
+import { nextMoveByAI } from '../../helpers/thinker';
 
 // cell style
 const patternRectStyle = {
@@ -22,16 +23,57 @@ const patternRectHoverStyle = {
 
 // component for gathering all the cells.
 const Cells = props => {
-    const { start, boardWidth, boardHeight, patternRectHeight, patternRectWidth, changePlayer, player , setScoreToPlayer} = props;
+    const { start, boardWidth, boardHeight, patternRectHeight, patternRectWidth, changePlayer, player, setScoreToPlayer, score } = props;
     let tempCells = [];
     const [tracker, setTracker] = useState([]);
-    const [cells, setCells] = useState([]);
     const [renderCount, setRenderCount] = useState(0)
+    const [siriContinues, setSiriContinues] = useState(0);
     const trackerTemp = [];
     const [strikeOuts, setStrikeOuts] = useState([])
 
+    useEffect(() => {
+        if (tracker.length && player == 'Siri') {
+            setSiriContinues(0);
+
+        }
+    }, [player]);
+
+    // useEffect(() => {
+    //     // if (tracker.length && player === 'Siri')
+    //     if (player === 'Siri' && siriContinues) {
+    //         const AImove = nextMoveByAI(copyData(tracker), patternRectWidth, patternRectHeight);
+
+    //         setTimeout(() => {
+    //             console.log('AI move called')
+    //             setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
+    //         }, 1500);
+    //         console.log('Siri plays ******* ');
+    //     }
+    //     // console.log('Siri continues ', siriContinues)
+    // }, [siriContinues])
+
+    useEffect(() => {
+        if (player == 'Siri') {
+            // console.log('Siri plays')
+            const AImove = nextMoveByAI(copyData(tracker), patternRectWidth, patternRectHeight);
+            if (siriContinues < 5) {
+                setTimeout(() => {
+                    console.log('AI move called ', AImove)
+                    setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
+                }, 1500);
+            } else {
+                setTimeout(() => {
+                console.log('AI move called ', AImove)
+                setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
+                }, 500);
+            }
+
+            console.log('Siri plays ******* ');
+        }
+    }, [tracker]);
+
     const setTrackerValue = (id, value, surroundingCells) => {
-        console.log('tracker is ', tracker)
+        // console.log('tracker is ', tracker)
         const eleIndex = tracker.findIndex(el => el.key === id);
         const newTracker = [...tracker];
         newTracker[eleIndex].value = value;
@@ -39,14 +81,38 @@ const Cells = props => {
     }
 
     const setGlowClass = (x, y, selVal) => {
+        let tempStrikePoints = [], newTracker = [];
+        console.log(x, y);
+        // removeGlow2()
         // if the given element is 'O', them iterate over elements around 'O', as its the center piece.
         if (selVal === 'O') {
-            matchByO(x, y, selVal);
+            const oMatches = matchByO(x, y, selVal);
+            tempStrikePoints = copyData(oMatches.tempStrikePoints)
+            newTracker = copyData(oMatches.newTracker);
         } else {
-            matchByS(x, y, selVal);
+            const sMatches = matchByS(x, y, selVal);
+            tempStrikePoints = copyData(sMatches.tempStrikePoints)
+            newTracker = copyData(sMatches.newTracker);
         }
-        changePlayer();
-    }
+
+
+        setStrikeOuts(oldVals => [...oldVals, ...tempStrikePoints]);
+        // removeGlow(surroundingCells, x, y, firstLevelMatchIndexes);
+        setScoreToPlayer(tempStrikePoints.length);
+        const eleIndex = tracker.findIndex(el => el.key === x + '-' + y);
+        newTracker[eleIndex].value = selVal;
+
+        // if the user doesn't scores then, change the player.
+        if (tempStrikePoints.length == 0) {
+            changePlayer();
+        } // end if
+
+        // if player is Siri, and it scored points, then continue Siri as the striker
+        if (player === 'Siri' && tempStrikePoints.length) {
+            setSiriContinues(prev => prev + 1);
+        }
+        setTracker(newTracker);
+    } // end of setGlowClass
 
     const matchByO = (x, y, selVal) => {
         const surroundingCells = getSurroundingCells(x, y, patternRectWidth, patternRectHeight); // [];
@@ -54,7 +120,7 @@ const Cells = props => {
         let secondLevelMatchIndex = -1;
         const pairVal = selVal === 'S' ? 'O' : 'S';
         const tempStrikePoints = [];
-        let newTracker = [...tracker]
+        let newTracker = copyData(tracker.map(t => ({ ...t, glowClass: 0 })))
 
         for (let i = 0; i < surroundingCells.length; i += 2) {
             const s1 = surroundingCells[i]
@@ -75,7 +141,9 @@ const Cells = props => {
                         x1: newTracker[eleIndex1].x,
                         y1: newTracker[eleIndex1].y,
                         x2: newTracker[eleIndex2].x,
-                        y2: newTracker[eleIndex2].y
+                        y2: newTracker[eleIndex2].y,
+                        midX: x,
+                        midY: y
                     }
                 } // end obj
                 tempStrikePoints.push(strikePointObj);
@@ -83,19 +151,19 @@ const Cells = props => {
             } // end of if
         }
 
-        setStrikeOuts(oldVals => [...oldVals, ...tempStrikePoints]);
-        setScoreToPlayer(tempStrikePoints.length);
-        removeGlow(surroundingCells, x, y, false);
-        setTracker(copyData(newTracker));
-        return;
+        // setStrikeOuts(oldVals => [...oldVals, ...tempStrikePoints]);
+        // setScoreToPlayer(tempStrikePoints.length);
+        // removeGlow(surroundingCells, x, y, false);
+        // setTracker(copyData(newTracker));
+        return { newTracker, tempStrikePoints };
     }
 
     const matchByS = (x, y, selVal) => {
-        let newTracker = [...tracker]
+        let newTracker = copyData(tracker.map(t => ({ ...t, glowClass: 0 })))
 
-        let firstLevelMatchIndex = -1;
+        // let firstLevelMatchIndex = -1;
         let secondLevelMatchIndex = -1;
-        let firstLevelMatchPos = '';
+
 
         let firstLevelMatchIndexes = [];
         let secondLevelMatchIndexes = [];
@@ -109,12 +177,9 @@ const Cells = props => {
         for (const cell of surroundingCells) {
             const eleIndex = tracker.findIndex(el => el.key === cell.key);
             if (eleIndex < 0) continue;
-            // newTracker = [...tracker];
             newTracker[eleIndex].glowClass = cell.pos;
             // if the surrounding cell has a match i.e, for SOS, User clicked cell is first 'S', so 'O' should be available in the surrounding
             if (newTracker[eleIndex].value == pairVal) {
-                firstLevelMatchIndex = eleIndex;
-                firstLevelMatchPos = cell.pos;
                 firstLevelMatchIndexes.push(eleIndex); // if 'O' is availble then push the Index and position in an array.
                 firstLevelMatchPositions.push(cell.pos);
                 console.log('******* First level match found at ', newTracker[eleIndex], '*******')
@@ -129,21 +194,23 @@ const Cells = props => {
             for (const cell of secondSurrounding) {
                 const eleIndex = tracker.findIndex(el => el.key === cell.key);
                 if (eleIndex < 0) continue;
-                // newTracker = [...tracker];
+
                 newTracker[eleIndex].glowClass = cell.pos;
                 if (newTracker[eleIndex].value == selVal) {
                     secondLevelMatchIndex = eleIndex;
                     secondLevelMatchIndexes.push(eleIndex);
                     // gets the index of the match. since the match is checked by position filtered items, it ll be in the same order as firstLevelMatchINdexes
                     const matchOCell = tracker[firstLevelMatchIndexes.shift()];
-                    
+
                     tempStrikePoints.push({
                         keys: [matchOCell.key, newTracker[eleIndex].key, x + '-' + y],
                         strikePoints: {
                             x1: x,
                             y1: y,
                             x2: newTracker[eleIndex].x,
-                            y2: newTracker[eleIndex].y
+                            y2: newTracker[eleIndex].y,
+                            midX: matchOCell.x,
+                            midY: matchOCell.y
                         }
                     })
                     console.log('******* second level match found *******')
@@ -154,61 +221,44 @@ const Cells = props => {
         console.log('temporary strikes are ', tempStrikePoints);
 
         //If given element is 'S'
-        // const matchFound = (firstLevelMatchIndex > -1 && secondLevelMatchIndex > -1);
-        // matchFound && console.log('!!!!!!!! Match found !!!!!!');
-        // if there's a SOS match then strike out the cells.
-        // if (matchFound) {
-        //     const currentCell = tracker.find(el => el.key === x + '-' + y);
-        //     currentCell.value = selVal;
-        //     const strikePoints = {};
-        //     const matchCells = [newTracker[firstLevelMatchIndex], newTracker[secondLevelMatchIndex], currentCell];
-        //     let coOrdinateCount = 1; // marks (x1, y1) (x2, y2) Since there's 3 elements in `matchCell` its limited to 2.
-        //     for (var cell of matchCells) {
-        //         // find the two extereme 'S' in the match
-        //         if (cell.value === 'S') {
-        //             strikePoints['x' + coOrdinateCount] = cell.x;
-        //             strikePoints['y' + coOrdinateCount] = cell.y;
-        //             coOrdinateCount++;
-        //         }
-        //     }
 
-        //     const sprikePoints = {
-        //         keys: matchCells.map(ele => ele.key),
-        //         strikePoints//: { x1, y1, x2, y2 }
-        //     }
-        //     setStrikeOuts(oldVals => [...oldVals, sprikePoints]);
-        // }
-        setStrikeOuts(oldVals => [...oldVals, ...tempStrikePoints]);
+        // setStrikeOuts(oldVals => [...oldVals, ...tempStrikePoints]);
+        // removeGlow(surroundingCells, x, y, firstLevelMatchIndexes);
+        // setScoreToPlayer(tempStrikePoints.length);
+        // setTracker(copyData(newTracker));
 
-        removeGlow(surroundingCells, x, y, firstLevelMatchIndex);
-
-        setScoreToPlayer(tempStrikePoints.length);
-
-        setTracker(copyData(newTracker));
+        return { newTracker, tempStrikePoints };
     }
 
 
     // removes the className for glow after a second.
-    const removeGlow = (surroundingCells, x, y, firstLevelMatchIndex) => {
-        let newTracker = [...tracker]
-        // removes the set classes after the animation is complete
-        setTimeout(() => {
-            // newTracker = [];
-            for (const cell of surroundingCells) {
-                const eleIndex = tracker.findIndex(el => el.key === cell.key);
-                if (eleIndex < 0) continue;
-                newTracker[eleIndex].glowClass = false;
-            }
-            if (firstLevelMatchIndex > -1) {
-                const secondSurrounding = getSecondSurroundingCells(x, y, patternRectWidth, patternRectHeight)
-                for (const cell of secondSurrounding) {
-                    const eleIndex = tracker.findIndex(el => el.key === cell.key);
-                    if (eleIndex < 0) continue;
-                    newTracker[eleIndex].glowClass = false;
-                }
-            }
-            setTracker(copyData(newTracker));
-        }, 1000);
+    // const removeGlow = (surroundingCells, x, y, firstLevelMatchIndexes) => {
+    //     let newTracker = copyData(tracker);
+    //     // removes the set classes after the animation is complete
+    //     setTimeout(() => {
+    //         // newTracker = [];
+    //         for (const cell of surroundingCells) {
+    //             const eleIndex = tracker.findIndex(el => el.key === cell.key);
+    //             if (eleIndex < 0) continue;
+    //             newTracker[eleIndex].glowClass = false;
+    //         }
+    //         if (firstLevelMatchIndexes.length) {
+    //             const secondSurrounding = getSecondSurroundingCells(x, y, patternRectWidth, patternRectHeight)
+    //             for (const cell of secondSurrounding) {
+    //                 const eleIndex = tracker.findIndex(el => el.key === cell.key);
+    //                 if (eleIndex < 0) continue;
+    //                 newTracker[eleIndex].glowClass = false;
+    //             }
+    //         }
+    //         setTracker(copyData(newTracker));
+    //     }, 1000);
+    // }
+
+    const removeGlow2 = () => {
+        const newTracker = copyData(tracker);
+        const mutatedTracker = newTracker.map(t => ({ ...t, glowClass: '' }));
+        // setTimeout(() => setTracker(mutatedTracker), 1000);
+        setTracker(mutatedTracker);
     }
 
     const getValueById = id => tracker.find(el => el.key === id);
@@ -240,7 +290,7 @@ const Cells = props => {
         initialize();
     }, [])
 
-    console.log('Strike out points are ', strikeOuts);
+    // console.log('Trackers before render ', tracker);
 
     const getPolylinePoints = strikePoints => {
         const { x1, y1, x2, y2 } = strikePoints;
@@ -248,8 +298,14 @@ const Cells = props => {
         return `${x1 + (patternRectWidth / 2)},${y1 + (patternRectHeight / 2)} ${x2 + (patternRectWidth / 2)},${y2 + (patternRectHeight / 2)}`;
     }
 
+    const getCirclePoints = strikePoints => {
+        const { midX: x, midY: y } = strikePoints;
+        // patternRectWidth, patternRectHeight
+        return { cx: (x + (patternRectWidth / 2)), cy: (y + (patternRectHeight / 2)) };
+    }
+
     return <g>
-        {tracker.map(el => <Cell
+        {tracker.map((el, i) => <Cell
             setGlowClass={setGlowClass}
             glowClass={el.glowClass}
             getValueById={getValueById}
@@ -259,10 +315,14 @@ const Cells = props => {
             value={el.value}
             height={patternRectHeight}
             {...patternRectStyle}
+            index={i}
         />)}
         <g>
-            {strikeOuts.map(({ strikePoints }, i) => <polyline key={i} points={getPolylinePoints(strikePoints)}
-                style={{ fill: 'none', stroke: 'black', strokeWidth: '3' }} />)}
+            {strikeOuts.map(({ strikePoints, keys }, i) => <g key={i}><polyline key={i} points={getPolylinePoints(strikePoints)}
+                style={{ fill: 'none', stroke: 'black', strokeWidth: '3' }} />
+                <circle {...getCirclePoints(strikePoints)} className='demo-dot' r="5" stroke="black" fill="red" />
+            </g>)}
+
         </g>
     </g>
 }
