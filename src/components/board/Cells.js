@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Cell from './Cell';
-import { getSurroundingCells, copyData, getSecondSurroundingCells } from '../../helpers/utils';
+import { getSurroundingCells, copyData, getSecondSurroundingCells, AIName } from '../../helpers/utils';
 import { nextMoveByAI } from '../../helpers/thinker';
 
 // cell style
@@ -31,46 +31,33 @@ const Cells = props => {
     const trackerTemp = [];
     const [strikeOuts, setStrikeOuts] = useState([])
 
+    // if player is still AI, when AI scores then continue with AI moves
     useEffect(() => {
-        if (tracker.length && player == 'Siri') {
+        if (tracker.length && player == AIName) {
             setSiriContinues(0);
 
         }
     }, [player]);
 
     // useEffect(() => {
-    //     // if (tracker.length && player === 'Siri')
-    //     if (player === 'Siri' && siriContinues) {
+    //     if (player == AIName) {
+    //         // console.log('Siri plays')
     //         const AImove = nextMoveByAI(copyData(tracker), patternRectWidth, patternRectHeight);
-
-    //         setTimeout(() => {
-    //             console.log('AI move called')
+    //         if (siriContinues < 5) {
+    //             setTimeout(() => {
+    //                 console.log('AI move called ', AImove)
+    //                 setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
+    //             }, 1500);
+    //         } else {
+    //             setTimeout(() => {
+    //             console.log('AI move called ', AImove)
     //             setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
-    //         }, 1500);
+    //             }, 500);
+    //         }
+
     //         console.log('Siri plays ******* ');
     //     }
-    //     // console.log('Siri continues ', siriContinues)
-    // }, [siriContinues])
-
-    useEffect(() => {
-        if (player == 'Siri') {
-            // console.log('Siri plays')
-            const AImove = nextMoveByAI(copyData(tracker), patternRectWidth, patternRectHeight);
-            if (siriContinues < 5) {
-                setTimeout(() => {
-                    console.log('AI move called ', AImove)
-                    setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
-                }, 1500);
-            } else {
-                setTimeout(() => {
-                console.log('AI move called ', AImove)
-                setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
-                }, 500);
-            }
-
-            console.log('Siri plays ******* ');
-        }
-    }, [tracker]);
+    // }, [tracker]);
 
     const setTrackerValue = (id, value, surroundingCells) => {
         // console.log('tracker is ', tracker)
@@ -108,7 +95,7 @@ const Cells = props => {
         } // end if
 
         // if player is Siri, and it scored points, then continue Siri as the striker
-        if (player === 'Siri' && tempStrikePoints.length) {
+        if (player === AIName && tempStrikePoints.length) {
             setSiriContinues(prev => prev + 1);
         }
         setTracker(newTracker);
@@ -319,8 +306,8 @@ const Cells = props => {
         />)}
         <g>
             {strikeOuts.map(({ strikePoints, keys }, i) => <g key={i}><polyline key={i} points={getPolylinePoints(strikePoints)}
-                style={{ fill: 'none', stroke: 'black', strokeWidth: '3' }} />
-                <circle {...getCirclePoints(strikePoints)} className='demo-dot' r="5" stroke="black" fill="red" />
+                style={{ fill: 'none', stroke: 'black', strokeWidth: '2' }} />
+                {/* <circle {...getCirclePoints(strikePoints)} className='demo-dot' r="5" stroke="black" fill="red" /> */}
             </g>)}
 
         </g>

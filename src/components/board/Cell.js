@@ -50,7 +50,7 @@ const Cell = props => {
             // onClick={() =>  setTrackerValue(x + '-' + y, 'S')}
             onDoubleClick={() => { setEle('O'); checkForSOS('O') }}
         />
-        <text x={x + (width * 0.5)} y={y + (height * 0.7)} fill="red">{value}</text>
+        <text x={x + (width * 0.35)} y={y + (height * 0.6)} fill="red">{value}</text>
        {recStyle.style.strokeWidth === '7px' && <text x={x} y={y + 6} fontSize='6'>{index}</text>} 
     </g>
 }

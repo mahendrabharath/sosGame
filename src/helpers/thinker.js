@@ -10,7 +10,7 @@
 9. If no 'S' or 'O' is available in the grid then, Provide a 'S' in a random place.
 */
 
-import { getSurroundingCells, getThirdSurroundingCells, getSurroundingCellsByState } from "./utils";
+import { getSurroundingCells, getThirdSurroundingCells, getSurroundingCellsByState, AIName } from "./utils";
 
 const createSurroundingsForCells = (cells, type, patternRectWidth, patternRectHeight) => {
     const cellsSurrounding = [];
@@ -72,8 +72,8 @@ export const nextMoveByAI = (tracker, patternRectWidth, patternRectHeight) => {
     if (!resultMoves.length) {
         const allUserEnteredCells = [];
         allUserEnteredCells.push(
-            ...cellsSurroundingS.filter(el => el.player !== 'Siri'), // .map(el => el.surroundingCells),
-            ...cellsSurroundingO.filter(el => el.player !== 'Siri') // .map(el => el.surroundingCells)
+            ...cellsSurroundingS.filter(el => el.player !== AIName), // .map(el => el.surroundingCells),
+            ...cellsSurroundingO.filter(el => el.player !== AIName) // .map(el => el.surroundingCells)
         )
 
         const casualMoveCell = checkDefenceMove(tracker);

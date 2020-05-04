@@ -8,14 +8,16 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Board from '../components/board/Board';
 import GetUserDetails from '../components/getUserDetails/GetUserDetails';
 
-const mapStateToProps = state => ({ articles: state });
+
+const mapStateToProps = state => ({ gameData: state });
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playerName: '',
-      cellsCount: ''
-    }
+  }
+
+  componentDidMount() {
+    if (!this.props.gameData.name)
+      this.props.history.push('/setup');
   }
 
   render() {

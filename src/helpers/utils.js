@@ -1,4 +1,6 @@
-const r = num => num - Math.floor(num) === 0 ? num : num.toFixed(2);
+export const r = num => num - Math.floor(num) === 0 ? num : Number(num.toFixed(2));
+
+export const AIName = 'Siri';
 
 const roundCordinatesInKeys = (ele) => {
     const { key } = ele;
