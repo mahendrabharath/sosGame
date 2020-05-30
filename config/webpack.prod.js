@@ -5,6 +5,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 const common = require('./webpack.common.js');
 var utility = require("./utility");
 var WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = "production";
 
@@ -17,11 +18,11 @@ module.exports = merge(common, {
   },
 
   plugins: [
-    new WebpackBundleSizeAnalyzerPlugin({
-      analyzerMode: 'static',
-      //  openAnalyzer : true,
-      generateStatsFile: true
-    }),
+    // new WebpackBundleSizeAnalyzerPlugin({
+    //   analyzerMode: 'static',
+    //   //  openAnalyzer : true,
+    //   generateStatsFile: true
+    // }),
     new webpack.NoEmitOnErrorsPlugin(),
     new UglifyJSPlugin(),
     new ExtractTextPlugin("[name].[hash].css"),
@@ -30,5 +31,9 @@ module.exports = merge(common, {
         "ENV": JSON.stringify(ENV)
       }
     }),
+    new CopyWebpackPlugin([
+      // copies to {output}/static
+      { from: '../src/assets/*', to: '../dist/assets' }
+    ])
   ]
 });

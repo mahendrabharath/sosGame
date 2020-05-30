@@ -30,7 +30,8 @@ const Cell = props => {
 
         // setTrackerValue(x + '-' + y, val)
     }
-
+    let clickCount = 1;
+    let timer = null;
     return <g>
         <rect
             className={'cell-' + glowClass}
@@ -41,17 +42,34 @@ const Cell = props => {
             width={width}
             height={height}
             onClick={(e) => {
-                if (e.altKey) {
-                    setEle('O'); checkForSOS('O');
+                e.persist()
+                if (clickCount < 2) {
+                    console.log('Click Increased ', clickCount)
+                    clickCount++;
+                    timer = setTimeout(() => {
+                        console.log('Single click')
+                        if (e.altKey) {
+                            setEle('O'); checkForSOS('O');
+                        } else {
+                            setEle('S'); checkForSOS('S')
+                        }
+                        clickCount = 0;
+                    }, 300)
                 } else {
-                    setEle('S'); checkForSOS('S')
+                    clearTimeout(timer)
+                    console.log('Double click')
+                    setEle('O'); checkForSOS('O');
                 }
+
             }}
             // onClick={() =>  setTrackerValue(x + '-' + y, 'S')}
-            onDoubleClick={() => { setEle('O'); checkForSOS('O') }}
+            onDoubleClick={() => {
+                console.log('Double clicked')
+                setEle('O'); checkForSOS('O')
+            }}
         />
         <text x={x + (width * 0.35)} y={y + (height * 0.6)} fill="red">{value}</text>
-       {recStyle.style.strokeWidth === '7px' && <text x={x} y={y + 6} fontSize='6'>{index}</text>} 
+        {recStyle.style.strokeWidth === '7px' && <text x={x} y={y + 6} fontSize='6'>{index}</text>}
     </g>
 }
 

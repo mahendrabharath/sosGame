@@ -39,25 +39,25 @@ const Cells = props => {
         }
     }, [player]);
 
-    // useEffect(() => {
-    //     if (player == AIName) {
-    //         // console.log('Siri plays')
-    //         const AImove = nextMoveByAI(copyData(tracker), patternRectWidth, patternRectHeight);
-    //         if (siriContinues < 5) {
-    //             setTimeout(() => {
-    //                 console.log('AI move called ', AImove)
-    //                 setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
-    //             }, 1500);
-    //         } else {
-    //             setTimeout(() => {
-    //             console.log('AI move called ', AImove)
-    //             setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
-    //             }, 500);
-    //         }
+    useEffect(() => {
+        if (player == AIName) {
+            // console.log('Siri plays')
+            const AImove = nextMoveByAI(copyData(tracker), patternRectWidth, patternRectHeight);
+            if (siriContinues < 5) {
+                setTimeout(() => {
+                    console.log('AI move called ', AImove)
+                    setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
+                }, 1500);
+            } else {
+                setTimeout(() => {
+                console.log('AI move called ', AImove)
+                setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
+                }, 500);
+            }
 
-    //         console.log('Siri plays ******* ');
-    //     }
-    // }, [tracker]);
+            console.log('Siri plays ******* ');
+        }
+    }, [tracker]);
 
     const setTrackerValue = (id, value, surroundingCells) => {
         // console.log('tracker is ', tracker)

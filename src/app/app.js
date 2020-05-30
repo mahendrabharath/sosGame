@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Board from '../components/board/Board';
 import GetUserDetails from '../components/getUserDetails/GetUserDetails';
+import GsapModal from '../components/Modal/Modal';
 
 
 const mapStateToProps = state => ({ gameData: state });
@@ -23,10 +24,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Switch>
+        <GsapModal />
+        {/* <Switch>
           <Route path='/' exact component={Board} />
           <Route path='/setup' exact component={GetUserDetails} />
-        </Switch>
+        </Switch> */}
       </div >
     );
   }

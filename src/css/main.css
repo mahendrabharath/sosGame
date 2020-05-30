@@ -1,14 +1,30 @@
 /* ---------- Board CSS ----------------*/
- /* .board-container {
+
+
+.board-container {
   display: flex; 
-} */
-.game-board{
-  width: 80%;
+}
+
+.game-board {
+    width: 65%;
+    /* height: 100vh; */
     float: left;
 }
+
+.mobile-board-container .game-board {
+    width: 100%;
+}
+
+.game-board-wait {
+    cursor: wait;
+}
+
+
 /* -------------------------------------*/
 
+
 /* ------------------------------------------------------------------ */
+
 .cell-top {
     fill: black;
     animation: svg-fill;
@@ -40,7 +56,6 @@
     animation-delay: 500ms;
 }
 
-
 .cell-bottomLeft {
     animation: svg-fill;
     animation-duration: 0.5s;
@@ -53,8 +68,6 @@
     animation-delay: 750ms;
 }
 
-
-
 .cell-topLeft {
     animation: svg-fill;
     animation-duration: 0.5s;
@@ -65,7 +78,6 @@
     from {
         fill: rgb(30, 93, 148);
     }
-
     to {
         fill: rgb(77, 127, 171);
     }
@@ -79,56 +91,61 @@ polyline {
     stroke-dashoffset: 200;
     animation: dash 1s linear normal 1;
     animation-fill-mode: forwards;
-  }
-  
-  @keyframes dash {
+}
+
+@keyframes dash {
     from {
-      stroke-dashoffset: 200;
+        stroke-dashoffset: 200;
     }
     to {
-      stroke-dashoffset: 0;
+        stroke-dashoffset: 0;
     }
-  }
+}
+
 
 /*---------------- Playing animation ---------------------*/
- 
-  /* .playing {
+
+
+/* .playing {
     position: absolute;
     top: 0px;
     left: 43%;
   } */
 
-  .playing:after {
+.playing:after {
     overflow: hidden;
     display: inline-block;
     vertical-align: bottom;
-    -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
-    animation: ellipsis steps(4,end) 900ms infinite;
-    content: "\2026"; /* ascii code for the ellipsis character */
+    -webkit-animation: ellipsis steps(4, end) 900ms infinite;
+    animation: ellipsis steps(4, end) 900ms infinite;
+    content: "\2026";
+    /* ascii code for the ellipsis character */
     width: 0px;
-  }
-  
-  @keyframes ellipsis {
+}
+
+@keyframes ellipsis {
     to {
-      width: 1.25em;    
+        width: 1.25em;
     }
-  }
-  
-  @-webkit-keyframes ellipsis {
+}
+
+@-webkit-keyframes ellipsis {
     to {
-      width: 1.25em;    
+        width: 1.25em;
     }
-  }
+}
+
 
 /* ---------------- Fly to score board ------------------------ */
 
-
 .demo-dot {
-  position: absolute;
-  animation: xAxis 2.5s 1 cubic-bezier(0.02, 0.01, 0.21, 1);
-  animation-fill-mode: forwards;
-  animation-delay: 1s;
+    position: absolute;
+    animation: xAxis 2.5s 1 cubic-bezier(0.02, 0.01, 0.21, 1);
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
 }
+
+
 /*   
 .demo-dot::after {
   content: '';
@@ -141,29 +158,34 @@ polyline {
   animation-fill-mode: forwards;
 }
  */
+
 @keyframes yAxis {
-  50% {
-    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
-    transform: translate(540px, 300px);
-  }
-  100% {
-    transform: translate(840px, 50px);
-  }
+    50% {
+        animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+        transform: translate(540px, 300px);
+    }
+    100% {
+        transform: translate(840px, 50px);
+    }
 }
 
 @keyframes xAxis {
-  50% {
-    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
-    transform: translate(540px, 300px);
-  }
-  100% {
-    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
-    transform: translate(1140px, 50px);
-  }
+    50% {
+        animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+        transform: translate(540px, 300px);
+    }
+    100% {
+        animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+        transform: translate(1140px, 50px);
+    }
 }
 
+
 /* Score card css */
+
+
 /* @import 'https://fonts.googleapis.com/css?family=Raleway'; */
+
 
 /* body, html {
   margin: 0;
@@ -172,204 +194,240 @@ polyline {
 } */
 
 .profile {
-  width: 250px;
-  height: 80px;
-  position: relative;
-  top: 15%;
-  left: 65%;
-  transform: translate(-50%, -50%);
-  border-radius: 5px;
-  background-color: #fafafa;
-  box-shadow: 0 0 2rem #babbbc;
-  animation: show-profile 0.5s forwards ease-in-out;
-  margin: 5px;
-  font-family: "Raleway", "Microsoft JhengHei", Arial, sans-serif;
-}
-@keyframes show-profile {
-  0% {
-    width: 0;
-  }
-}
-.profile .photo, .profile .content {
-  box-sizing: border-box;
-}
-.profile .photo {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 5px solid #fafafa;
-  background-color: #fafafa;
-  margin-left: -50px;
-  box-shadow: 0 0 0.5rem #babbbc;
-  animation: rotate-photo 0.5s forwards ease-in-out;
-}
-@keyframes rotate-photo {
-  100% {
-    transform: rotate(-360deg);
-  }
-}
-.profile .photo img {
-  width: 100%;
-}
-.profile .content {
-  padding: 10px;
-  overflow: hidden;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-.profile .content::before {
-  content: "";
-  position: absolute;
-  width: 200px;
-  height: 150px;
-  background-color: #e9f3e6;
-  left: 0;
-  top: -20px;
-  z-index: -1;
-  transform: rotate(-8deg);
-}
-.profile .content .text {
-  margin-top: 10px;
-  margin-left: 30px;
-}
-.profile .content .text h3, .profile .content .text h6 {
-  font-weight: normal;
-  margin: 3px 0;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-}
-.profile .content .btn {
-  background-color: #abc;
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  right: 10%;
-  top: 22%;
-  border-radius: 50%;
-  z-index: 1;
-  cursor: pointer;
-  transition-duration: 0.3s;
-  animation: pop-btn 0.3s both ease-in-out 0.5s;
-}
-@keyframes pop-btn {
-  0% {
-    transform: scale(0);
-  }
-  80% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-.profile .content .btn:hover, .btn-active {
-  box-shadow: 0 0 0 5px rgba(170, 187, 204, 0.5);
-}
-.profile .content .btn span {
-  width: 60%;
-  height: 2px;
-  position: absolute;
-  background-color: white;
-  top: 50%;
-  left: 20%;
-  transform: translateY(-50%);
-  animation: to-hamburger 0.3s forwards ease-in-out;
-}
-.profile .content .btn span::before, .profile .content .btn span::after {
-  content: "";
-  width: 100%;
-  height: 2px;
-  position: absolute;
-  background-color: white;
-  transition-duration: 0.3s;
-  transform: rotate(0deg);
-  right: 0;
-}
-.profile .content .btn span::before {
-  margin-top: -7px;
-}
-.profile .content .btn span::after {
-  margin-top: 7px;
-}
-.profile .content .btn.active span {
-  animation: to-arrow 0.3s forwards ease-in-out;
-}
-.profile .content .btn.active span::before, .profile .content .btn.active span::after {
-  width: 60%;
-  right: -1px;
-}
-.profile .content .btn.active span::before {
-  transform: rotate(45deg);
-}
-.profile .content .btn.active span::after {
-  transform: rotate(-45deg);
-}
-@keyframes to-hamburger {
-  from {
-    transform: translateY(-50%) rotate(-180deg);
-  }
-}
-@keyframes to-arrow {
-  from {
-    transform: translateY(-50%) rotate(0deg);
-  }
-  to {
-    transform: translateY(-50%) rotate(180deg);
-  }
+    width: 250px;
+    height: 80px;
+    position: relative;
+    top: 15%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    background-color: #fafafa;
+    box-shadow: 0 0 2rem #babbbc;
+    animation: show-profile 0.5s forwards ease-in-out;
+    margin: 5px;
+    font-family: "Raleway", "Microsoft JhengHei", Arial, sans-serif;
 }
 
+.profile.hide {
+    animation: hide-profile 0.5s forwards ease-in-out;
+    width: 0px;
+}
+
+@keyframes show-profile {
+    0% {
+        width: 0;
+    }
+}
+
+@keyframes hide-profile {
+    0% {
+        width: 0;
+    }
+}
+
+.profile .photo,
+.profile .content {
+    box-sizing: border-box;
+}
+
+.profile .photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fafafa;
+    background-color: #fafafa;
+    margin-left: -50px;
+    box-shadow: 0 0 0.5rem #babbbc;
+    animation: rotate-photo 0.5s forwards ease-in-out;
+}
+
+@keyframes rotate-photo {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.profile .photo img {
+    width: 100%;
+}
+
+.profile .content {
+    padding: 10px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.profile .content::before {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    background-color: #e9f3e6;
+    left: 0;
+    top: -20px;
+    z-index: -1;
+    transform: rotate(-8deg);
+}
+
+.profile .content .text {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.profile .content .text h3,
+.profile .content .text h6 {
+    font-weight: normal;
+    margin: 3px 0;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.profile .content .btn {
+    background-color: #abc;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 10%;
+    top: 22%;
+    border-radius: 50%;
+    z-index: 1;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    animation: pop-btn 0.3s both ease-in-out 0.5s;
+}
+
+@keyframes pop-btn {
+    0% {
+        transform: scale(0);
+    }
+    80% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.profile .content .btn:hover,
+.btn-active {
+    box-shadow: 0 0 0 5px rgba(170, 187, 204, 0.5);
+}
+
+.profile .content .btn span {
+    width: 60%;
+    height: 2px;
+    position: absolute;
+    background-color: white;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%);
+    animation: to-hamburger 0.3s forwards ease-in-out;
+}
+
+.profile .content .btn span::before,
+.profile .content .btn span::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    background-color: white;
+    transition-duration: 0.3s;
+    transform: rotate(0deg);
+    right: 0;
+}
+
+.profile .content .btn span::before {
+    margin-top: -7px;
+}
+
+.profile .content .btn span::after {
+    margin-top: 7px;
+}
+
+.profile .content .btn.active span {
+    animation: to-arrow 0.3s forwards ease-in-out;
+}
+
+.profile .content .btn.active span::before,
+.profile .content .btn.active span::after {
+    width: 60%;
+    right: -1px;
+}
+
+.profile .content .btn.active span::before {
+    transform: rotate(45deg);
+}
+
+.profile .content .btn.active span::after {
+    transform: rotate(-45deg);
+}
+
+@keyframes to-hamburger {
+    from {
+        transform: translateY(-50%) rotate(-180deg);
+    }
+}
+
+@keyframes to-arrow {
+    from {
+        transform: translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateY(-50%) rotate(180deg);
+    }
+}
 
 .bar {
-  position: absolute;
-  top: 50%;
-  left: 15%;
-  height: 3px;
-  width: 52%;
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    height: 3px;
+    width: 52%;
 }
 
 .emptybar {
-  background-color: #e9f3e6;
-  width: 100%;
-  height: 100%;
+    background-color: #e9f3e6;
+    width: 100%;
+    height: 100%;
 }
 
 .filledbar {
-  position: absolute;
-  top: 0px;
-  z-index: 3;
-  width: 0px;
-  height: 100%;
-  background: rgb(0,154,217);
-  background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
-  transition: 0.6s ease-out;
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+    width: 0px;
+    height: 100%;
+    background: rgb(0, 154, 217);
+    background: linear-gradient(90deg, rgba(0, 154, 217, 1) 0%, rgba(217, 147, 0, 1) 65%, rgba(255, 186, 0, 1) 100%);
+    transition: 0.6s ease-out;
 }
 
-.text:hover .filledbar, .filledbar-active {
-  width: 120px;
-  transition: 0.4s ease-out;
+.text:hover .filledbar,
+.filledbar-active {
+    width: 120px;
+    transition: 0.4s ease-out;
 }
 
-
-.text:hover .filledbar, .filledbar-active {
-  width: 120px;
-  transition: 0.4s ease-out;
+.text:hover .filledbar,
+.filledbar-active {
+    width: 120px;
+    transition: 0.4s ease-out;
 }
-
 
 .score-card-container {
-  display: flex;
-  flex-flow: column;
-  width: 20%;
-  float: left;
-  margin-top: 5%;
+    display: flex;
+    flex-flow: column;
+    width: 30%;
+    float: left;
+    margin-top: 5%;
 }
 
-
 .score {
-  text-align: center;
-  margin-top: 12px;
+    text-align: center;
+    margin-top: 12px;
 }

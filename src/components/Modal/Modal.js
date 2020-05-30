@@ -1,0 +1,115 @@
+import React, { useRef, useState, useEffect } from 'react';
+import { TimelineMax, Power4, Power3, Power2, gsap } from 'gsap/gsap-core';
+import './Modal.css'
+import { CSSPlugin } from 'gsap/CSSPlugin'
+
+const GsapModal = props => {
+
+    const modalRef = useRef(null)
+    const openButtonRef = useRef(null)
+    const modalContentlRef = useRef(null)
+    const modalDialogRef = useRef(null)
+    const modalPolygonRef = useRef(null)
+    const modalSVGRef = useRef(null)
+
+
+    let animation = {};
+    // vanilla JS
+    var body = document.body;
+    var modal = modalRef; // createModal(document.querySelector("#modal-1"));
+    var openButton = openButtonRef; // document.querySelector("#open-button");
+
+    useEffect(() => {
+
+
+        var container = modalRef.current;
+        var content = modalContentlRef.current; // container.querySelector(".modal-content");
+        var dialog = modalDialogRef.current; // container.querySelector(".modal-dialog");
+        var polygon = modalPolygonRef.current; // container.querySelector(".modal-polygon");
+        var svg = modalSVGRef.current; // container.querySelector(".modal-svg");
+
+        var point1 = createPoint(45, 45);
+        var point2 = createPoint(155, 45);
+        var point3 = createPoint(55, 55);
+        var point4 = createPoint(45, 55);
+
+        function createPoint(x, y) {
+            var point = polygon.points.appendItem(svg.createSVGPoint());
+            point.x = x || 0;
+            point.y = y || 0;
+            return point;
+        }
+
+
+        var newAnimation = new TimelineMax({
+            // onReverseComplete: onReverseComplete,
+            // onStart: onStart,
+            paused: true
+        })
+            .to(point1, 0.3, {
+                x: 15,
+                y: 30,
+                duration: 2,
+                ease: Power4.easeIn
+            }, 0)
+            .to(point4, 0.3, {
+                x: 5,
+                y: 80,
+                ease: Power3.easeIn
+            }, "-=0.1")
+            .to(point1, 0.3, {
+                x: 0,
+                y: 0,
+                ease: Power3.easeIn
+            })
+            .to(point2, 0.3, {
+                x: 100,
+                y: 0,
+                ease: Power2.easeIn
+            }, "-=0.2")
+            .to(point3, 0.3, {
+                x: 100,
+                y: 100,
+                ease: Power2.easeIn
+            })
+            .to(point4, 0.3, {
+                x: 0,
+                y: 100,
+                ease: Power2.easeIn
+            }, "-=0.1")
+            .to(container, 1, {
+                autoAlpha: 1
+            }, 0)
+            .to(content, 1, {
+                autoAlpha: 1
+            }); // .reverse()
+        animation = newAnimation;
+    }, []);
+
+
+
+    return <div><section className="controls">
+        <button ref={openButtonRef} onClick={() => animation.play()} id="open-button">{'Open'}</button>
+        <button onClick={() => animation.reverse().time(1.5)} id="open-button">{'Close'}</button>
+    </section>
+
+        <section id="modal-1" ref={modalRef} className="modal-container">
+
+            <div ref={modalDialogRef} className="modal-dialog">
+                <svg ref={modalSVGRef} className="modal-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <polygon ref={modalPolygonRef} className="modal-polygon" />
+                </svg>
+
+                <div ref={modalContentlRef} className="modal-content">
+                    <h2>I'm a modal</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis excepturi ut inventore consectetur quos rerum quibusdam accusamus, labore itaque assumenda consequatur cum saepe velit quidem ipsa facilis. Repellendus, reiciendis quam?</p>
+                </div>
+
+            </div>
+        </section>
+    </div>
+};
+
+gsap.registerPlugin(CSSPlugin)
+
+export default GsapModal;

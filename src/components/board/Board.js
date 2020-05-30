@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cells from './Cells';
 import { copyData, AIName, r } from '../../helpers/utils';
 import { connect } from 'react-redux';
@@ -23,7 +23,14 @@ const outterRectStyle = {
 const { innerWidth, innerHeight } = window;
 const x = r(innerWidth * 0.05); // sets the tables x cordinate
 const y = r(innerHeight * 0.05); // sets the tables y cordinate
-const width = innerWidth - (innerWidth * 0.25); // leaves a gap of 0.1% for width from the window horizontal edges
+
+let widthMargin = 0.35; // leaves 3.5% gap from the screen
+
+if ( innerWidth <= 450 ) {
+    widthMargin = 0.2
+}
+
+const width = innerWidth - (innerWidth * widthMargin); // leaves a gap of 0.1% for width from the window horizontal edges
 const height = innerHeight - (innerHeight * 0.1); // leaves a gap of 0.1% for width from the window vertical edges
 
 const boardDimensions = { x, y, width, height }
@@ -31,7 +38,11 @@ const boardDimensions = { x, y, width, height }
 const patternRectWidth = 40; // individual cell's width is 5% of the table's width
 const patternRectHeight = 40; // individual cell's height is 5% of the table's height
 
-console.log(boardDimensions)
+console.log(boardDimensions); // Math.ceil((936 - 72) / 40)
+const rnd = num => Math.round(num);
+const noOfCells = {x: Math.ceil((rnd(width) - x) / 40), y: Math.ceil((rnd(height) - y) / 40)};
+console.log('Number of cells is', noOfCells.x * noOfCells.y, noOfCells) ;
+
 
 const Board = (props) => {
     const { name: playerName } = props.gameData;
@@ -47,13 +58,18 @@ const Board = (props) => {
         prevScore[playerIndex].score += count;
         setScore(prevScore);
     }
-debugger
-    return <div className='board-container'>
+    debugger
+
+    const mobileClass = innerWidth <= 450 ? 'mobile-' : '';
+    useEffect(() => {
+        // alert('innerWidth '+ innerWidth + ' Device '+mobileClass)
+    }, [])
+    return <div className={mobileClass + 'board-container'}>
         {/* <div style={{ position: 'fixed', color: setPlayerTurnColor(playerName) }}><h2>P1: </h2><p>{playerName} - {score[0].score}</p></div>
         <div><h2 className='playing'>{playerName}, playing</h2></div> */}
-        <ScoreCard setPlayerTurnColor={setPlayerTurnColor} score={score} playerName={playerName} playerTurn={playerTurn} />
-        <div className='game-board'>
-            <svg width={width + patternRectWidth} height={height + patternRectHeight}>
+        <ScoreCard mobileClass={mobileClass} setPlayerTurnColor={setPlayerTurnColor} score={score} playerName={playerName} playerTurn={playerTurn} />
+        <div className={playerTurn == AIName ? 'game-board-wait' : 'game-board'}>
+            <svg width={width + patternRectWidth} height={height + patternRectHeight} style={playerTurn == AIName ? { pointerEvents: 'none' } : {}}>
                 {/* <rect x={x} y={y} width={width} height={height} {...outterRectStyle} /> */}
                 <Cells start={{ x, y }}
                     patternRectWidth={Math.round(patternRectWidth)}
@@ -66,10 +82,9 @@ debugger
                 />
             </svg>
         </div>
-        {/* <div style={{ position: 'absolute', top: '0px', right: '0px', padding: '5px', color: setPlayerTurnColor(AIName) }}>
-            <h2>P2: </h2>
-            <p>{AIName} - {score[1].score}</p>
-        </div> */}
+        <div>
+
+        </div>
     </div>
 }
 export default connect(mapStateToProps, null)(Board);
