@@ -25,3 +25,5 @@ export const getGrpImages = value => ({type: actionTypes.GET_GROUP_IMAGES, paylo
 export const getGrpAllImages = value => ({type: actionTypes.GET_GROUP_ALL_IMAGES, payload: value});
 
 export const setupGame = value => ({type: actionTypes.SET_UP_GAME, payload: value});
+
+export const changeBoardDimensions = value => ({type: actionTypes.CHANGE_BOARD_DIMENSION, payload: value});

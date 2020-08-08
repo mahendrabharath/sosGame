@@ -37,7 +37,7 @@ export const getSecondSurroundingCells = (x, y, width, height) => {
     surroundCell2.push({ pos: 'bottomLeft', key: `${x - width * 2}-${y + height * 2}` }) // cell's bottom left corner key
     surroundCell2.push({ pos: 'left', key: `${x - width * 2}-${y}` }); // cell's left key
     surroundCell2.push({ pos: 'topLeft', key: `${x - width * 2}-${y - height * 2}` }) // cell's top left corner key
-    
+
     surroundCell2 = surroundCell2.map(roundCordinatesInKeys)
 
     return surroundCell2;
@@ -148,3 +148,9 @@ export const getThirdSurroundingCells = (x, y, width, height) => {
 //         setGlowClass(surrondKey, false)
 //     }
 // }, 1000);
+
+
+export const userData = (playerName) => ([
+    { name: playerName, score: 0, cellsUsed: 0, image: '/assets/images/myAvatar.png' },
+    { name: AIName, score: 0, cellsUsed: 0, image: '/assets/images/profile-512.jpg' }
+])

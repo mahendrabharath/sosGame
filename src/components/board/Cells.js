@@ -23,7 +23,8 @@ const patternRectHoverStyle = {
 
 // component for gathering all the cells.
 const Cells = props => {
-    const { start, boardWidth, boardHeight, patternRectHeight, patternRectWidth, changePlayer, player, setScoreToPlayer, score } = props;
+    const { start, boardWidth, boardHeight, patternRectHeight, patternRectWidth,
+        changePlayer, player, setScoreToPlayer, score } = props;
     let tempCells = [];
     const [tracker, setTracker] = useState([]);
     const [renderCount, setRenderCount] = useState(0)
@@ -40,7 +41,8 @@ const Cells = props => {
     }, [player]);
 
     useEffect(() => {
-        if (player == AIName) {
+        const emtptyCells = tracker.filter(el => !el.value).length;
+        if (player == AIName && emtptyCells) {
             // console.log('Siri plays')
             const AImove = nextMoveByAI(copyData(tracker), patternRectWidth, patternRectHeight);
             if (siriContinues < 5) {
@@ -50,8 +52,8 @@ const Cells = props => {
                 }, 1500);
             } else {
                 setTimeout(() => {
-                console.log('AI move called ', AImove)
-                setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
+                    console.log('AI move called ', AImove)
+                    setGlowClass(AImove[0].x, AImove[0].y, AImove[0].value)
                 }, 500);
             }
 
@@ -70,6 +72,8 @@ const Cells = props => {
     const setGlowClass = (x, y, selVal) => {
         let tempStrikePoints = [], newTracker = [];
         console.log(x, y);
+        const cellsOccupied = tracker.filter(el => el.value).length;
+
         // removeGlow2()
         // if the given element is 'O', them iterate over elements around 'O', as its the center piece.
         if (selVal === 'O') {
@@ -99,6 +103,7 @@ const Cells = props => {
             setSiriContinues(prev => prev + 1);
         }
         setTracker(newTracker);
+
     } // end of setGlowClass
 
     const matchByO = (x, y, selVal) => {
@@ -254,9 +259,9 @@ const Cells = props => {
         const tempTrackerFinal = [];
         // creating a (a X b) matrix for the board
         // first set the board y axis are initial height, then iterate over the cell height
-        for (let y = start.y; y <= boardHeight; y += patternRectHeight) {
+        for (let y = start.y; y < boardHeight; y += patternRectHeight) {
             // first set the board x axis as initial width, then iterate overt the cell's width
-            for (let x = start.x; x <= boardWidth; x += patternRectWidth) {
+            for (let x = start.x; x < boardWidth; x += patternRectWidth) {
                 const newEle = {
                     key: x + '-' + y,
                     x, y,
@@ -311,6 +316,8 @@ const Cells = props => {
             </g>)}
 
         </g>
+        {/* <use id="use" xlinkHref='#myCell' /> */}
+
     </g>
 }
 

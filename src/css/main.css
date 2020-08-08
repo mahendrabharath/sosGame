@@ -1,8 +1,7 @@
 /* ---------- Board CSS ----------------*/
 
-
 .board-container {
-  display: flex; 
+    display: flex;
 }
 
 .game-board {
@@ -19,9 +18,7 @@
     cursor: wait;
 }
 
-
 /* -------------------------------------*/
-
 
 /* ------------------------------------------------------------------ */
 
@@ -83,7 +80,6 @@
     }
 }
 
-
 /* --- animate the strikings --- */
 
 polyline {
@@ -102,9 +98,7 @@ polyline {
     }
 }
 
-
 /*---------------- Playing animation ---------------------*/
-
 
 /* .playing {
     position: absolute;
@@ -135,7 +129,6 @@ polyline {
     }
 }
 
-
 /* ---------------- Fly to score board ------------------------ */
 
 .demo-dot {
@@ -144,7 +137,6 @@ polyline {
     animation-fill-mode: forwards;
     animation-delay: 1s;
 }
-
 
 /*   
 .demo-dot::after {
@@ -180,12 +172,9 @@ polyline {
     }
 }
 
-
 /* Score card css */
 
-
 /* @import 'https://fonts.googleapis.com/css?family=Raleway'; */
-
 
 /* body, html {
   margin: 0;
@@ -225,8 +214,7 @@ polyline {
     }
 }
 
-.profile .photo,
-.profile .content {
+.profile .photo, .profile .content {
     box-sizing: border-box;
 }
 
@@ -279,8 +267,7 @@ polyline {
     margin-left: 30px;
 }
 
-.profile .content .text h3,
-.profile .content .text h6 {
+.profile .content .text h3, .profile .content .text h6 {
     font-weight: normal;
     margin: 3px 0;
     letter-spacing: 0.5px;
@@ -313,8 +300,7 @@ polyline {
     }
 }
 
-.profile .content .btn:hover,
-.btn-active {
+.profile .content .btn:hover, .btn-active {
     box-shadow: 0 0 0 5px rgba(170, 187, 204, 0.5);
 }
 
@@ -329,8 +315,7 @@ polyline {
     animation: to-hamburger 0.3s forwards ease-in-out;
 }
 
-.profile .content .btn span::before,
-.profile .content .btn span::after {
+.profile .content .btn span::before, .profile .content .btn span::after {
     content: "";
     width: 100%;
     height: 2px;
@@ -353,8 +338,7 @@ polyline {
     animation: to-arrow 0.3s forwards ease-in-out;
 }
 
-.profile .content .btn.active span::before,
-.profile .content .btn.active span::after {
+.profile .content .btn.active span::before, .profile .content .btn.active span::after {
     width: 60%;
     right: -1px;
 }
@@ -407,14 +391,12 @@ polyline {
     transition: 0.6s ease-out;
 }
 
-.text:hover .filledbar,
-.filledbar-active {
+.text:hover .filledbar, .filledbar-active {
     width: 120px;
     transition: 0.4s ease-out;
 }
 
-.text:hover .filledbar,
-.filledbar-active {
+.text:hover .filledbar, .filledbar-active {
     width: 120px;
     transition: 0.4s ease-out;
 }
@@ -430,4 +412,53 @@ polyline {
 .score {
     text-align: center;
     margin-top: 12px;
+}
+
+.awake-container {
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: fixed;
+}
+
+.warning-shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+    10% {
+        transform: translate(-1px, -1px) rotate(-1deg);
+    }
+    /* 20% {
+        transform: translate(-1px, 0px) rotate(1deg);
+    } */
+    30% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+    /* 40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    } */
+    50% {
+        transform: translate(-1px, 1px) rotate(-1deg);
+    }
+    60% {
+        transform: translate(-1px, 1px) rotate(0deg);
+    }
+    /* 70% {
+        transform: translate(1px, 1px) rotate(-1deg);
+    } */
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+    /* 90% {
+        transform: translate(1px, 1px) rotate(0deg);
+    } */
+    100% {
+        transform: translate(1px, -1px) rotate(-1deg);
+    }
 }

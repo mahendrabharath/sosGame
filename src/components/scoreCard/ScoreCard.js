@@ -15,7 +15,7 @@ const ScoreCard = props => {
     const isAIPlaying = playerTurn === AIName;
 
     if (mobileClass) {
-       return <MobileScoreCard isAIPlaying={isAIPlaying} {...props}/>;
+        return <MobileScoreCard isAIPlaying={isAIPlaying} {...props} />;
     }
 
     return <div className={"score-card-container"}>
@@ -23,7 +23,7 @@ const ScoreCard = props => {
             <img src="src/assets/images/crown-main.png" />
         </div> */}
         <div className={"profile"}>
-            <div className="photo"><img src="/assets/images/profile-512.jpg" />
+            <div className="photo"><img src={score[1].image} />
             </div>
             <div className="content">
                 <div className="text">
@@ -40,7 +40,7 @@ const ScoreCard = props => {
 
         <div className={"profile"}>
             <div className="photo">
-                <img src="/assets/images/myAvatar.png" />
+                <img src={score[0].image} />
             </div>
             <div className="content">
                 <div className="text">

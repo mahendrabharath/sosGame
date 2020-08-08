@@ -1,0 +1,8 @@
+/* @import url('assets/css/fonts/Crimson_Text/CrimsonText-Regular.ttf'); */
+p {
+    font-family: 'Crimson Text';font-size: 22px;
+}
+
+.photo img {
+    width: 50%;
+}

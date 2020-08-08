@@ -8,9 +8,9 @@ const ScoreCard = props => {
         <div className='score-card-active' >
             <h2>P1: </h2>
             <p>{playerName} - {score[0].score}</p>
-            {/* <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
+            {/* <div className="bar">
+                <div className="emptybar"></div>
+                <div className="filledbar"></div>
             </div> */}
         </div>
         <div>
@@ -19,9 +19,9 @@ const ScoreCard = props => {
         <div>
             <h2>P2: </h2>
             <p>{AIName} - {score[1].score}</p>
-            <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
+            <div className="bar">
+                <div className="emptybar"></div>
+                <div className="filledbar"></div>
             </div>
         </div>
     </div>

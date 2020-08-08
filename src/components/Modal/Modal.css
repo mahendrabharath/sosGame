@@ -34,6 +34,14 @@ button {
     overflow: hidden;
   }
   
+  
+  .modal-dialog-mobile {
+    width: 70vmin;
+    height: 100vmin;  
+    position: relative;
+    overflow: hidden;
+  }
+  
   .modal-svg {
     position: absolute;
     top: 0;
@@ -43,10 +51,10 @@ button {
   }
   
   .modal-polygon {
-    fill: #47bc83;
+    /* fill: #47bc83; */
   }
   
-  .modal-content {
+  .modal-content.win {
     position: relative;
     top: 0;
     left: 0;
@@ -56,3 +64,14 @@ button {
     color: rgba(255,255,255,0.87);
     background: linear-gradient(45deg, #5ed49a, #2f9cd2c4)
   }
+
+  .modal-content.lose {
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 24px;  
+    visibility: hidden;
+    opacity: 0;  
+    color: rgba(138, 24, 24, 0.87);
+    background: linear-gradient(270deg, #fdedd4, #959e94);
+}

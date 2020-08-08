@@ -8,7 +8,7 @@ export const MobileScoreCard = props => {
 
     return <div className="mobile-score-card-container">
         <div className={isAIPlaying ? "mobile-profile active" : "mobile-profile"}>
-            <div className="mobile-photo"><img src="src/assets/images/profile-512.jpg" />
+            <div className="mobile-photo"><img src="/assets/images/profile-512.jpg" />
             </div>
             <div className="mobile-content">
                 <div className="mobile-text">
@@ -26,7 +26,7 @@ export const MobileScoreCard = props => {
         </div>
 
         <div className={!isAIPlaying ? "mobile-profile active" : "mobile-profile"}>
-            <div className="mobile-photo"><img src="src/assets/images/myAvatar.png" />
+            <div className="mobile-photo"><img src="/assets/images/myAvatar.png" />
             </div>
             <div className="mobile-content">
                 <div className="mobile-text">

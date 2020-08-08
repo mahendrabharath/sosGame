@@ -14,7 +14,7 @@ var local = process.argv.reduce(function (p, c) {
 
 module.exports = {
   entry: {
-    
+
     app: './src/index.js'
   },
 
@@ -28,12 +28,14 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/, query: {
-          presets: ['react', 'es2015','stage-0', 'stage-2'] // ,'bundle?lazy&name=[name]'
+          presets: ['react', 'es2015', 'stage-0', 'stage-2'] // ,'bundle?lazy&name=[name]'
         }
       },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/,query: {
-        presets: ['react', 'es2015','stage-0' ,'stage-2']
-      } },
+      {
+        test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/, query: {
+          presets: ['react', 'es2015', 'stage-0', 'stage-2']
+        }
+      },
       {
         test: /\.(s*)css$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
@@ -45,7 +47,10 @@ module.exports = {
       {
         test: /\.(svg|woff|woff2|eot|ttf)$/,
         loader: 'file-loader?name=fonts/[name].[ext]',
-      },
+      }, {
+        test: /\.mp4$/,
+        use: 'file-loader?name=videos/[name].[ext]',
+      }
     ]
   },
 
